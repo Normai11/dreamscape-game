@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://nwfll56cc7lp"]
+
+[ext_resource type="PackedScene" uid="uid://bfvj6cx84cexq" path="res://assets/Player/player.tscn" id="1_i4mmp"]
+[ext_resource type="Script" uid="uid://c63xb8ot48d2" path="res://assets/objects/advanced_camera.gd" id="2_26xia"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e8n54"]
+size = Vector2(1252, 72)
+
+[node name="teststage" type="Node2D" unique_id=109890452]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2053145266]
+position = Vector2(585, 621)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1032225854]
+shape = SubResource("RectangleShape2D_e8n54")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1599100054]
+position = Vector2(-836, 277)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=610265567]
+shape = SubResource("RectangleShape2D_e8n54")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1766851684]
+position = Vector2(2115, 277)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=1810620912]
+shape = SubResource("RectangleShape2D_e8n54")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1104558403]
+position = Vector2(240, 659)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2" unique_id=1943542228]
+polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=432259173]
+position = Vector2(1039, 659)
+scale = Vector2(-1, 1)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4" unique_id=56400639]
+polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
+
+[node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
+position = Vector2(581, 315)
+
+[node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
+limit_enabled = false
+script = ExtResource("2_26xia")
+cameraTarget = NodePath("../Player")

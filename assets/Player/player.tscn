@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://bfvj6cx84cexq"]
+
+[ext_resource type="Script" uid="uid://dbtf0gspu7fm3" path="res://assets/Player/player.gd" id="1_7gujn"]
+[ext_resource type="Script" uid="uid://n5d37j8s8rhm" path="res://assets/state_machine.gd" id="2_hvr4l"]
+[ext_resource type="Script" uid="uid://bphlgiop62fd6" path="res://assets/Player/stateIdle.gd" id="3_7gujn"]
+[ext_resource type="Script" uid="uid://bqtqv1d104xlr" path="res://assets/Player/stateMove.gd" id="4_hvr4l"]
+[ext_resource type="Script" uid="uid://ca6v0ihcosu3h" path="res://assets/Player/stateDash.gd" id="5_cr3b8"]
+[ext_resource type="Script" uid="uid://ddj8q7mhv30gv" path="res://assets/Player/stateCrouch.gd" id="5_vfaks"]
+[ext_resource type="Script" uid="uid://bm4e85tat2st0" path="res://assets/Player/stateDashJump.gd" id="6_6gjsn"]
+[ext_resource type="Script" uid="uid://w3xa34g1xmsn" path="res://assets/Player/stateSlide.gd" id="6_nh4ep"]
+[ext_resource type="Script" uid="uid://cvklsaiajxqng" path="res://assets/Player/stateSlam.gd" id="7_6gjsn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_674bt"]
+radius = 16.0
+height = 32.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdrta"]
+radius = 16.0
+height = 64.0
+
+[node name="Player" type="CharacterBody2D" unique_id=692287280]
+collision_layer = 0
+floor_constant_speed = true
+floor_snap_length = 32.0
+script = ExtResource("1_7gujn")
+
+[node name="debugState" type="Label" parent="." unique_id=1599481162]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -93.0
+offset_right = 324.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_alignment = 1
+
+[node name="debugSpeed" type="Label" parent="." unique_id=2095928790]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -62.0
+offset_right = 324.0
+offset_bottom = -39.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_alignment = 1
+
+[node name="Crouch" type="CollisionShape2D" parent="." unique_id=1233785737]
+position = Vector2(0, 16)
+shape = SubResource("CapsuleShape2D_674bt")
+disabled = true
+debug_color = Color(0.5665466, 0.39231595, 1, 0.41960785)
+
+[node name="Stand" type="CollisionShape2D" parent="." unique_id=831269369]
+shape = SubResource("CapsuleShape2D_fdrta")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1424011280 node_paths=PackedStringArray("initialState", "debugLabel")]
+script = ExtResource("2_hvr4l")
+initialState = NodePath("Idle")
+debugLabel = NodePath("../debugState")
+metadata/_custom_type_script = "uid://n5d37j8s8rhm"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1241455249]
+script = ExtResource("3_7gujn")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Move" type="Node" parent="StateMachine" unique_id=879054277]
+script = ExtResource("4_hvr4l")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Crouch" type="Node" parent="StateMachine" unique_id=1674037296]
+script = ExtResource("5_vfaks")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Slide" type="Node" parent="StateMachine" unique_id=1536009513]
+script = ExtResource("6_nh4ep")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Dash" type="Node" parent="StateMachine" unique_id=1558350270]
+script = ExtResource("5_cr3b8")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="dashJump" type="Node" parent="StateMachine" unique_id=1151114373]
+script = ExtResource("6_6gjsn")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Slam" type="Node" parent="StateMachine" unique_id=1520902526]
+script = ExtResource("7_6gjsn")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
