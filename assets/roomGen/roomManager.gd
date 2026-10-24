@@ -6,9 +6,11 @@ const searchPath : String = "res://assets/roomGen/rooms/roomCFG/"
 
 @onready var posMarker : Marker2D = $posMarker
 
+@export var generateOnReady : bool = false
 @export var generationPosition : Vector2 = Vector2.ZERO
 @export var setSeed : bool = false
 @export var genSeed : int
+@export var doRegularCleanup : bool = false
 @export var maxAttempts : int = 32
 @export var roomNum : int = 5
 
@@ -31,6 +33,9 @@ func _ready() -> void:
 	roomCFGlist = get_roomCFGs()
 	
 	add_commands()
+	
+	if generateOnReady:
+		generate_rooms()
 
 func add_commands() -> void:
 	Console.add_command("generate_rooms", generate_rooms, [], 0, "Calls the RoomManager to start generating rooms")
@@ -38,7 +43,7 @@ func add_commands() -> void:
 
 func roll_room() -> RoomConfiguration:
 	if roomCFGlist:
-		return roomCFGlist[randi_range(0, roomCFGlist.size()-1)]
+		return roomCFGlist[RNG.randi_range(0, roomCFGlist.size()-1)]
 	else:
 		return null
 
@@ -88,6 +93,9 @@ func generate_rooms() -> void:
 		queue_redraw()
 	Console.print_info("Generation finished! Rooms placed: %d / %d" % [successes, roomNum])
 	
+	cleanup_room_areas()
+
+func cleanup_room_areas() -> void:
 	for room in instantiatedRoomList:
 		room.free_generation_object()
 
@@ -127,6 +135,8 @@ func place_room(data : RoomConfiguration) -> void:
 	posMarker.global_position = instance.linkObj.global_position
 	if data.flipGeneration:
 		genDirection = -genDirection
+		if doRegularCleanup:
+			cleanup_room_areas()
 
 func get_roomCFGs() -> Array[RoomConfiguration]:
 	var search := DirAccess.open(searchPath)

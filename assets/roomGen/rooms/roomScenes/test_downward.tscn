@@ -9,13 +9,13 @@ size = Vector2(584, 44)
 size = Vector2(1168, 44)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmqbj"]
-size = Vector2(28, 476)
+size = Vector2(28, 273)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aom5"]
-size = Vector2(28, 344)
+size = Vector2(28, 150)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_th4b7"]
-size = Vector2(1108, 558)
+size = Vector2(1108, 331)
 
 [node name="testDownward" type="Node2D" unique_id=439058609 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
 script = ExtResource("1_4iu0x")
@@ -25,7 +25,7 @@ linkObj = NodePath("exit")
 metadata/_custom_type_script = "uid://k1php2ihsd34"
 
 [node name="solid" type="StaticBody2D" parent="." unique_id=223055902]
-position = Vector2(292, 488)
+position = Vector2(292, 261)
 
 [node name="shape" type="CollisionShape2D" parent="solid" unique_id=1535649635]
 shape = SubResource("RectangleShape2D_08bpb")
@@ -37,35 +37,36 @@ position = Vector2(584, 22)
 shape = SubResource("RectangleShape2D_vgt0m")
 
 [node name="solid3" type="StaticBody2D" parent="." unique_id=1010232567]
-position = Vector2(1154, 348)
+position = Vector2(1154, 121)
 
 [node name="shape" type="CollisionShape2D" parent="solid3" unique_id=1032401118]
-position = Vector2(0, -66)
+position = Vector2(0, 35.5)
 shape = SubResource("RectangleShape2D_nmqbj")
 
 [node name="solid4" type="StaticBody2D" parent="." unique_id=772724038]
-position = Vector2(14, 208)
+position = Vector2(14, -19)
 
 [node name="shape" type="CollisionShape2D" parent="solid4" unique_id=848355816]
+position = Vector2(0, 97)
 shape = SubResource("RectangleShape2D_6aom5")
 
 [node name="solid5" type="StaticBody2D" parent="." unique_id=1777877370]
-position = Vector2(876, 628)
+position = Vector2(876, 401)
 
 [node name="shape" type="CollisionShape2D" parent="solid5" unique_id=1230830356]
 shape = SubResource("RectangleShape2D_08bpb")
 
 [node name="solid6" type="StaticBody2D" parent="." unique_id=526845650]
-position = Vector2(664, 509)
+position = Vector2(664, 282)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="solid6" unique_id=1750985922]
 polygon = PackedVector2Array(-80, -43, 62, 97, -80, 97)
 
 [node name="exit" type="Marker2D" parent="." unique_id=174201675]
-position = Vector2(1168, 606)
+position = Vector2(1168, 379)
 
 [node name="enter" type="Marker2D" parent="." unique_id=2102286326]
-position = Vector2(0, 466)
+position = Vector2(0, 239)
 
 [node name="genDetect" type="Area2D" parent="." unique_id=2132349580]
 position = Vector2(584, 325)
@@ -74,5 +75,6 @@ collision_mask = 0
 monitoring = false
 
 [node name="size" type="CollisionShape2D" parent="genDetect" unique_id=1818463271]
+position = Vector2(0, -113.5)
 shape = SubResource("RectangleShape2D_th4b7")
 debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)

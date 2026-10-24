@@ -5,9 +5,9 @@
 
 [resource]
 script = ExtResource("1_210px")
-roomSize = Vector2(1108, 558)
-roomLinkPosition = Vector2(1168, 606)
-roomEnterPosition = Vector2(0, 466)
+roomSize = Vector2(1108, 331)
+roomLinkPosition = Vector2(1168, 379)
+roomEnterPosition = Vector2(0, 239)
 roomScene = ExtResource("1_gk38c")
 customMargin = Vector2(28, 46)
 metadata/_custom_type_script = "uid://k6pxcgrw3w0j"

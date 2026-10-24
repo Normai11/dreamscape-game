@@ -2,10 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bfvj6cx84cexq" path="res://assets/Player/player.tscn" id="1_i4mmp"]
 [ext_resource type="Script" uid="uid://c63xb8ot48d2" path="res://assets/objects/advanced_camera.gd" id="2_26xia"]
-[ext_resource type="PackedScene" uid="uid://bvs2l4nolefqo" path="res://assets/roomGen/rooms/roomScenes/test_hallway.tscn" id="3_l4xrr"]
-[ext_resource type="PackedScene" uid="uid://dw0iiv4p87g45" path="res://assets/roomGen/rooms/roomScenes/test_downward.tscn" id="4_7qlp3"]
-[ext_resource type="PackedScene" uid="uid://chfcspa0cu7dj" path="res://assets/roomGen/rooms/roomScenes/test_flip.tscn" id="5_ux2pb"]
-[ext_resource type="PackedScene" uid="uid://g8d0b634xx20" path="res://assets/roomGen/rooms/roomScenes/test_upward.tscn" id="6_ux2pb"]
 [ext_resource type="PackedScene" uid="uid://bh1w36nsqvgsn" path="res://assets/roomGen/roomManager.tscn" id="7_abapv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8n54"]
@@ -14,64 +10,48 @@ size = Vector2(1252, 72)
 [node name="teststage" type="Node2D" unique_id=109890452]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2053145266]
-position = Vector2(585, 621)
+position = Vector2(-559, 584)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1032225854]
 shape = SubResource("RectangleShape2D_e8n54")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=1599100054]
-position = Vector2(-836, 277)
+position = Vector2(-1980, 240)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=610265567]
 shape = SubResource("RectangleShape2D_e8n54")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="." unique_id=1766851684]
-position = Vector2(2115, 277)
+position = Vector2(972, 244)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=1810620912]
 shape = SubResource("RectangleShape2D_e8n54")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1104558403]
-position = Vector2(240, 659)
+position = Vector2(-904, 622)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D2" unique_id=1943542228]
 polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=432259173]
-position = Vector2(1039, 659)
+position = Vector2(-105, 622)
 scale = Vector2(-1, 1)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4" unique_id=56400639]
 polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(2452, 98)
+position = Vector2(-439, 1046)
+doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
 limit_enabled = false
 script = ExtResource("2_26xia")
 cameraTarget = NodePath("../Player")
 
-[node name="testHallway" parent="." unique_id=1651768324 instance=ExtResource("3_l4xrr")]
-position = Vector2(-6908, 3084)
-
-[node name="testHallway2" parent="." unique_id=1564902912 instance=ExtResource("3_l4xrr")]
-position = Vector2(-5740, 3690)
-
-[node name="testDownward" parent="." unique_id=439058609 instance=ExtResource("4_7qlp3")]
-position = Vector2(-5740, 3084)
-
-[node name="testDownward2" parent="." unique_id=509212951 instance=ExtResource("4_7qlp3")]
-position = Vector2(-5740, 3690)
-scale = Vector2(-1, 1)
-
-[node name="testFlip" parent="." unique_id=411346776 instance=ExtResource("5_ux2pb")]
-position = Vector2(-4572, 3224)
-
-[node name="testUpward" parent="." unique_id=2067946587 instance=ExtResource("6_ux2pb")]
-position = Vector2(-6908, 3830)
-scale = Vector2(-1, 1)
-
 [node name="roomManager" parent="." unique_id=1508716217 instance=ExtResource("7_abapv")]
-position = Vector2(2744, 240)
+position = Vector2(-529, 1157)
+generateOnReady = true
+genSeed = 25
+doRegularCleanup = false
 roomNum = 30
