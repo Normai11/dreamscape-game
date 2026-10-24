@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bh1w36nsqvgsn"]
+
+[ext_resource type="Script" uid="uid://0v64c2wfhmie" path="res://assets/roomGen/roomManager.gd" id="1_ydem0"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_sbs54"]
+
+[node name="roomManager" type="Node2D" unique_id=1508716217]
+script = ExtResource("1_ydem0")
+
+[node name="posMarker" type="Marker2D" parent="." unique_id=20953225]
+gizmo_extents = 32.0
+
+[node name="Sprite2D" type="Sprite2D" parent="posMarker" unique_id=892225541]
+scale = Vector2(0.3125, 0.3125)
+texture = ExtResource("2_sbs54")

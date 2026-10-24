@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://bm4e85tat2st0" path="res://assets/Player/stateDashJump.gd" id="6_6gjsn"]
 [ext_resource type="Script" uid="uid://w3xa34g1xmsn" path="res://assets/Player/stateSlide.gd" id="6_nh4ep"]
 [ext_resource type="Script" uid="uid://cvklsaiajxqng" path="res://assets/Player/stateSlam.gd" id="7_6gjsn"]
+[ext_resource type="Script" uid="uid://b1bjsds4taxrm" path="res://assets/Player/stateBonk.gd" id="10_7a8rx"]
+[ext_resource type="Script" uid="uid://celpqp34w3ang" path="res://assets/Player/stateNoclip.gd" id="10_imw2v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_674bt"]
 radius = 16.0
@@ -19,9 +21,10 @@ radius = 16.0
 height = 64.0
 
 [node name="Player" type="CharacterBody2D" unique_id=692287280]
-collision_layer = 0
+collision_layer = 2
 floor_constant_speed = true
-floor_snap_length = 32.0
+floor_max_angle = 1.3089969
+floor_snap_length = 64.0
 script = ExtResource("1_7gujn")
 
 [node name="debugState" type="Label" parent="." unique_id=1599481162]
@@ -59,6 +62,12 @@ debug_color = Color(0.5665466, 0.39231595, 1, 0.41960785)
 [node name="Stand" type="CollisionShape2D" parent="." unique_id=831269369]
 shape = SubResource("CapsuleShape2D_fdrta")
 
+[node name="breakRay" type="RayCast2D" parent="." unique_id=422880315]
+target_position = Vector2(64, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+
 [node name="StateMachine" type="Node" parent="." unique_id=1424011280 node_paths=PackedStringArray("initialState", "debugLabel")]
 script = ExtResource("2_hvr4l")
 initialState = NodePath("Idle")
@@ -91,4 +100,12 @@ metadata/_custom_type_script = "uid://bpw16dd11n7qd"
 
 [node name="Slam" type="Node" parent="StateMachine" unique_id=1520902526]
 script = ExtResource("7_6gjsn")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="Bonk" type="Node" parent="StateMachine" unique_id=1178456591]
+script = ExtResource("10_7a8rx")
+metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="NOCLIP" type="Node" parent="StateMachine" unique_id=1131978549]
+script = ExtResource("10_imw2v")
 metadata/_custom_type_script = "uid://bpw16dd11n7qd"

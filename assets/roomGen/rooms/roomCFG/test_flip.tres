@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="RoomConfiguration" format=3 uid="uid://4hkkftolcutf"]
+
+[ext_resource type="PackedScene" uid="uid://chfcspa0cu7dj" path="res://assets/roomGen/rooms/roomScenes/test_flip.tscn" id="1_cxffi"]
+[ext_resource type="Script" uid="uid://k6pxcgrw3w0j" path="res://assets/roomGen/roomConfiguration.gd" id="1_mtvkv"]
+
+[resource]
+script = ExtResource("1_mtvkv")
+flipGeneration = true
+roomSize = Vector2(835, 884)
+roomLinkPosition = Vector2(0, 932)
+roomEnterPosition = Vector2(0, 356)
+roomScene = ExtResource("1_cxffi")
+customMargin = Vector2(28, 44)
+metadata/_custom_type_script = "uid://k6pxcgrw3w0j"

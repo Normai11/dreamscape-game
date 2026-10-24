@@ -1,6 +1,8 @@
 extends Node
 class_name StateMachine
 
+signal changeError(output)
+
 @export var initialState : State
 @export var debugLabel : Label
 

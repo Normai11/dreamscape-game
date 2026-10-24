@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="RoomConfiguration" format=3 uid="uid://b6ogp1yl3okpq"]
+
+[ext_resource type="Script" uid="uid://k6pxcgrw3w0j" path="res://assets/roomGen/roomConfiguration.gd" id="1_hqlxd"]
+[ext_resource type="PackedScene" uid="uid://g8d0b634xx20" path="res://assets/roomGen/rooms/roomScenes/test_upward.tscn" id="1_orsnq"]
+
+[resource]
+script = ExtResource("1_hqlxd")
+roomSize = Vector2(1108, 418)
+roomLinkPosition = Vector2(1168, 326)
+roomEnterPosition = Vector2(0, 466)
+roomScene = ExtResource("1_orsnq")
+customMargin = Vector2(28, 44)
+metadata/_custom_type_script = "uid://k6pxcgrw3w0j"

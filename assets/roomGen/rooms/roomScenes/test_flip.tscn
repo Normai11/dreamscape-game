@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://chfcspa0cu7dj"]
+
+[ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_ntp23"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yo0td"]
+size = Vector2(835, 884)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0q4ly"]
+size = Vector2(584, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ejc8"]
+size = Vector2(895, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wbqb"]
+size = Vector2(894, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o5afo"]
+size = Vector2(28, 225)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjlfa"]
+size = Vector2(28, 459)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36ue5"]
+size = Vector2(28, 910)
+
+[node name="testFlip" type="Node2D" unique_id=411346776 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
+script = ExtResource("1_ntp23")
+generationDetectArea = NodePath("genDetect")
+editorObjects = [NodePath("enter"), NodePath("exit")]
+linkObj = NodePath("exit")
+metadata/_custom_type_script = "uid://k1php2ihsd34"
+
+[node name="genDetect" type="Area2D" parent="." unique_id=1525024566]
+position = Vector2(448, 488)
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="size" type="CollisionShape2D" parent="genDetect" unique_id=1464123341]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_yo0td")
+debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=1351887196]
+position = Vector2(292, 378)
+
+[node name="shape" type="CollisionShape2D" parent="solid" unique_id=478463462]
+shape = SubResource("RectangleShape2D_0q4ly")
+
+[node name="solid2" type="StaticBody2D" parent="." unique_id=389005447]
+position = Vector2(584, 22)
+
+[node name="shape" type="CollisionShape2D" parent="solid2" unique_id=244315015]
+position = Vector2(-136.5, 0)
+shape = SubResource("RectangleShape2D_1ejc8")
+
+[node name="solid3" type="StaticBody2D" parent="." unique_id=188637627]
+position = Vector2(292, 954)
+
+[node name="shape" type="CollisionShape2D" parent="solid3" unique_id=166689092]
+position = Vector2(155, 0)
+shape = SubResource("RectangleShape2D_1wbqb")
+
+[node name="solid4" type="StaticBody2D" parent="." unique_id=1649629161]
+position = Vector2(14, 98)
+
+[node name="shape" type="CollisionShape2D" parent="solid4" unique_id=1662000128]
+position = Vector2(0, 59.5)
+shape = SubResource("RectangleShape2D_o5afo")
+
+[node name="solid5" type="StaticBody2D" parent="." unique_id=1506052295]
+position = Vector2(14, 682)
+
+[node name="shape" type="CollisionShape2D" parent="solid5" unique_id=1948826232]
+position = Vector2(0, -57.5)
+shape = SubResource("RectangleShape2D_mjlfa")
+
+[node name="solid6" type="StaticBody2D" parent="." unique_id=1458426709]
+position = Vector2(881, 499)
+
+[node name="shape" type="CollisionShape2D" parent="solid6" unique_id=327940949]
+shape = SubResource("RectangleShape2D_36ue5")
+
+[node name="enter" type="Marker2D" parent="." unique_id=1095115725]
+position = Vector2(0, 356)
+
+[node name="exit" type="Marker2D" parent="." unique_id=1235949094]
+position = Vector2(0, 932)

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dusdrcqk37cgb"]
+
+[ext_resource type="Script" uid="uid://bsjhgksaro4bb" path="res://instantcollisiontest.gd" id="1_vxd5i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrp05"]
+size = Vector2(414, 191)
+
+[node name="instantcollisiontest" type="Node2D" unique_id=351374427]
+script = ExtResource("1_vxd5i")
+target_position = Vector2(100, 100)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1120887333]
+position = Vector2(-1161, 21)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=744357726]
+position = Vector2(221, 136)
+shape = SubResource("RectangleShape2D_vrp05")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=565811284]
+position = Vector2(100, 100)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1579988156]
+zoom = Vector2(0.5, 0.5)

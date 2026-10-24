@@ -7,12 +7,15 @@ func enter() -> void:
 	dashTimer = 0.0
 	player = machine.get_parent()
 	player.abilityUsed = true
+	player.breakRay.enabled = true
 
 func physics_update(delta) -> void:
 	dashTimer += delta
 	
 	player.velocity.y = 0.0
 	player.velocity.x = (player.dashSpeed if abs(player.velocity.x) <= player.dashSpeed else abs(player.velocity.x)) * player.direction
+	
+	player.breakRay.target_position = Vector2(clampf(abs((player.velocity.x/4)) - 100, player.breakRayMinReach, INF) * player.direction, 0)
 	
 	player.move_and_slide()
 	check_transitions()
@@ -27,5 +30,10 @@ func check_transitions() -> void:
 			transitioned.emit(self, "slide")
 		else:
 			transitioned.emit(self, "slam")
+	if player.is_on_wall():
+		transitioned.emit(self, "bonk")
 	if dashTimer >= player.dashDuration:
 		transitioned.emit(self, "move")
+
+func exit() -> void:
+	player.breakRay.enabled = false
