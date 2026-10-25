@@ -5,7 +5,7 @@
 
 [resource]
 script = ExtResource("1_210px")
-roomSize = Vector2(1108, 331)
+roomSize = Vector2(1112, 335)
 roomLinkPosition = Vector2(1168, 379)
 roomEnterPosition = Vector2(0, 239)
 roomScene = ExtResource("1_gk38c")

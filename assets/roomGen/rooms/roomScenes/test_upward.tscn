@@ -3,13 +3,13 @@
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_tn5wy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xwhci"]
-size = Vector2(1108, 418)
+size = Vector2(1112, 422)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_crxow"]
-size = Vector2(584, 44)
+size = Vector2(584, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p5qok"]
-size = Vector2(1168, 44)
+size = Vector2(1168, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lioqh"]
 size = Vector2(28, 196)
@@ -18,7 +18,7 @@ size = Vector2(28, 196)
 size = Vector2(28, 344)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tn5wy"]
-size = Vector2(442, 44)
+size = Vector2(442, 22)
 
 [node name="testUpward" type="Node2D" unique_id=2067946587 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
 script = ExtResource("1_tn5wy")
@@ -41,12 +41,14 @@ debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
 position = Vector2(292, 488)
 
 [node name="shape" type="CollisionShape2D" parent="solid" unique_id=67965211]
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_crxow")
 
 [node name="solid2" type="StaticBody2D" parent="." unique_id=498863976]
 position = Vector2(584, 22)
 
 [node name="shape" type="CollisionShape2D" parent="solid2" unique_id=713809137]
+position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_p5qok")
 
 [node name="solid3" type="StaticBody2D" parent="." unique_id=1822367818]
@@ -66,7 +68,7 @@ shape = SubResource("RectangleShape2D_mmpsa")
 position = Vector2(876, 348)
 
 [node name="shape" type="CollisionShape2D" parent="solid5" unique_id=1771689175]
-position = Vector2(71, 0)
+position = Vector2(71, -11)
 shape = SubResource("RectangleShape2D_tn5wy")
 
 [node name="solid6" type="StaticBody2D" parent="." unique_id=442950912]

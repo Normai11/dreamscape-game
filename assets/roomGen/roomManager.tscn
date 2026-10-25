@@ -5,7 +5,6 @@
 
 [node name="roomManager" type="Node2D" unique_id=1508716217]
 script = ExtResource("1_ydem0")
-doRegularCleanup = null
 
 [node name="posMarker" type="Marker2D" parent="." unique_id=20953225]
 gizmo_extents = 32.0

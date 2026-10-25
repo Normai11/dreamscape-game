@@ -16,7 +16,8 @@ const searchPath : String = "res://assets/roomGen/rooms/roomCFG/"
 
 var RNG : RandomNumberGenerator = RandomNumberGenerator.new()
 var spaceState : PhysicsDirectSpaceState2D
-var roomCFGlist : Array[RoomConfiguration] = [] 
+var roomCFGlist : Array[RoomConfiguration] = []
+var roomWeights : Array[float] = []
 var instantiatedRoomList : Array[Room] = []
 var existentRoomList : Array[Room] = []
 var drawshapelist : Array[Rect2]
@@ -31,6 +32,8 @@ func _ready() -> void:
 	
 	spaceState = get_world_2d().direct_space_state
 	roomCFGlist = get_roomCFGs()
+	for room in roomCFGlist:
+		roomWeights.append(room.generationChance)
 	
 	add_commands()
 	
@@ -43,7 +46,7 @@ func add_commands() -> void:
 
 func roll_room() -> RoomConfiguration:
 	if roomCFGlist:
-		return roomCFGlist[RNG.randi_range(0, roomCFGlist.size()-1)]
+		return roomCFGlist[RNG.rand_weighted(roomWeights)]
 	else:
 		return null
 

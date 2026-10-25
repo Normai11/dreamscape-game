@@ -27,7 +27,7 @@ extends CharacterBody2D
 @export var doBonkPenalty : bool = false
 @export var bonkPenaltyAmt : float = 35.0
 ## Constant speed when in Dash state.
-@export var dashSpeed : float = 830.0
+@export var dashSpeed : float = 877.0
 @export var dashDuration : float = 0.42
 
 const breakRayMinReach : float = 64.0

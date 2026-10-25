@@ -40,18 +40,17 @@ scale = Vector2(-1, 1)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D4" unique_id=56400639]
 polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
 
+[node name="roomManager" parent="." unique_id=1508716217 instance=ExtResource("7_abapv")]
+position = Vector2(-529, 1157)
+generateOnReady = true
+genSeed = 25
+roomNum = 30
+
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(-439, 1046)
+position = Vector2(-293, 1126)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
 limit_enabled = false
 script = ExtResource("2_26xia")
 cameraTarget = NodePath("../Player")
-
-[node name="roomManager" parent="." unique_id=1508716217 instance=ExtResource("7_abapv")]
-position = Vector2(-529, 1157)
-generateOnReady = true
-genSeed = 25
-doRegularCleanup = false
-roomNum = 30

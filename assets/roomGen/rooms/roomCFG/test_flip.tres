@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_mtvkv")
 flipGeneration = true
-roomSize = Vector2(835, 884)
+roomSize = Vector2(839, 888)
 roomLinkPosition = Vector2(0, 932)
 roomEnterPosition = Vector2(0, 356)
 roomScene = ExtResource("1_cxffi")

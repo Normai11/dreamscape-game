@@ -2,20 +2,23 @@
 
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_4iu0x"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_th4b7"]
+size = Vector2(1112, 335)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_08bpb"]
-size = Vector2(584, 44)
+size = Vector2(584, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgt0m"]
-size = Vector2(1168, 44)
+size = Vector2(1168, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmqbj"]
-size = Vector2(28, 273)
+size = Vector2(28, 271)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6aom5"]
-size = Vector2(28, 150)
+size = Vector2(28, 131)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_th4b7"]
-size = Vector2(1108, 331)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uth8u"]
+size = Vector2(584, 22)
 
 [node name="testDownward" type="Node2D" unique_id=439058609 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
 script = ExtResource("1_4iu0x")
@@ -24,37 +27,51 @@ editorObjects = [NodePath("exit"), NodePath("enter")]
 linkObj = NodePath("exit")
 metadata/_custom_type_script = "uid://k1php2ihsd34"
 
+[node name="genDetect" type="Area2D" parent="." unique_id=2132349580]
+position = Vector2(584, 325)
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="size" type="CollisionShape2D" parent="genDetect" unique_id=1818463271]
+position = Vector2(0, -113.5)
+shape = SubResource("RectangleShape2D_th4b7")
+debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
+
 [node name="solid" type="StaticBody2D" parent="." unique_id=223055902]
 position = Vector2(292, 261)
 
 [node name="shape" type="CollisionShape2D" parent="solid" unique_id=1535649635]
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_08bpb")
 
 [node name="solid2" type="StaticBody2D" parent="." unique_id=1943916755]
 position = Vector2(584, 22)
 
 [node name="shape" type="CollisionShape2D" parent="solid2" unique_id=2025729078]
+position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_vgt0m")
 
 [node name="solid3" type="StaticBody2D" parent="." unique_id=1010232567]
 position = Vector2(1154, 121)
 
 [node name="shape" type="CollisionShape2D" parent="solid3" unique_id=1032401118]
-position = Vector2(0, 35.5)
+position = Vector2(0, 36.5)
 shape = SubResource("RectangleShape2D_nmqbj")
 
 [node name="solid4" type="StaticBody2D" parent="." unique_id=772724038]
 position = Vector2(14, -19)
 
 [node name="shape" type="CollisionShape2D" parent="solid4" unique_id=848355816]
-position = Vector2(0, 97)
+position = Vector2(0, 106.5)
 shape = SubResource("RectangleShape2D_6aom5")
 
 [node name="solid5" type="StaticBody2D" parent="." unique_id=1777877370]
 position = Vector2(876, 401)
 
 [node name="shape" type="CollisionShape2D" parent="solid5" unique_id=1230830356]
-shape = SubResource("RectangleShape2D_08bpb")
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_uth8u")
 
 [node name="solid6" type="StaticBody2D" parent="." unique_id=526845650]
 position = Vector2(664, 282)
@@ -67,14 +84,3 @@ position = Vector2(1168, 379)
 
 [node name="enter" type="Marker2D" parent="." unique_id=2102286326]
 position = Vector2(0, 239)
-
-[node name="genDetect" type="Area2D" parent="." unique_id=2132349580]
-position = Vector2(584, 325)
-collision_layer = 512
-collision_mask = 0
-monitoring = false
-
-[node name="size" type="CollisionShape2D" parent="genDetect" unique_id=1818463271]
-position = Vector2(0, -113.5)
-shape = SubResource("RectangleShape2D_th4b7")
-debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)

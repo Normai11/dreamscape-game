@@ -1,24 +1,28 @@
 [gd_scene format=3 uid="uid://bvs2l4nolefqo"]
 
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_ql4m6"]
+[ext_resource type="Script" uid="uid://b6tv7t6i0kcvv" path="res://assets/objects/destroyable.gd" id="2_ck3i4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3n8"]
-size = Vector2(1108, 272)
+size = Vector2(1112, 276)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d2qa7"]
-size = Vector2(1168, 44)
+size = Vector2(1168, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ywt5"]
-size = Vector2(1168, 44)
+size = Vector2(1168, 22)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wu4kd"]
-size = Vector2(28, 215)
+size = Vector2(28, 212)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5okcj"]
-size = Vector2(28, 232)
+size = Vector2(28, 212)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_665x8"]
 size = Vector2(160, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6vk0"]
+size = Vector2(52, 178)
 
 [node name="testHallway" type="Node2D" unique_id=1651768324 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
 script = ExtResource("1_ql4m6")
@@ -42,26 +46,28 @@ debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
 position = Vector2(584, 342)
 
 [node name="shape" type="CollisionShape2D" parent="solid" unique_id=940839726]
+position = Vector2(0, -11)
 shape = SubResource("RectangleShape2D_d2qa7")
 
 [node name="solid2" type="StaticBody2D" parent="." unique_id=139764880]
 position = Vector2(584, 22)
 
 [node name="shape" type="CollisionShape2D" parent="solid2" unique_id=735926128]
+position = Vector2(0, 11)
 shape = SubResource("RectangleShape2D_7ywt5")
 
 [node name="solid3" type="StaticBody2D" parent="." unique_id=572601788]
 position = Vector2(1154, 62)
 
 [node name="shape" type="CollisionShape2D" parent="solid3" unique_id=1414318477]
-position = Vector2(0, 64.5)
+position = Vector2(0, 66)
 shape = SubResource("RectangleShape2D_wu4kd")
 
 [node name="solid4" type="StaticBody2D" parent="." unique_id=1471627305]
 position = Vector2(14, 62)
 
 [node name="shape" type="CollisionShape2D" parent="solid4" unique_id=2129980378]
-position = Vector2(0, 56)
+position = Vector2(0, 66)
 shape = SubResource("RectangleShape2D_5okcj")
 
 [node name="solid5" type="StaticBody2D" parent="." unique_id=1062505301]
@@ -87,3 +93,13 @@ position = Vector2(1168, 320)
 
 [node name="enter" type="Marker2D" parent="." unique_id=1793662724]
 position = Vector2(0, 320)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="." unique_id=410266294]
+position = Vector2(583, 141)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_ck3i4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" unique_id=1777875421]
+shape = SubResource("RectangleShape2D_d6vk0")
+debug_color = Color(0.8678633, 0.0005458027, 0.85710365, 0.41960785)

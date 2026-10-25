@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cnx57xxu6xinf"]
+
+[ext_resource type="Texture2D" uid="uid://bp8g56yonmdpa" path="res://assets/shapes.png" id="1_c6l8r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vrp05"]
+atlas = ExtResource("1_c6l8r")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="Curve" id="Curve_ux2pb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -2.304621, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7qlp3"]
+curve = SubResource("Curve_ux2pb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fc3n8"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 100, 0)
+direction = Vector3(0, -1, 0)
+spread = 90.0
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+gravity = Vector3(0, 1200, 0)
+scale_min = 0.099999994
+scale_max = 0.099999994
+alpha_curve = SubResource("CurveTexture_7qlp3")
+
+[node name="destroyTest" type="GPUParticles2D" unique_id=1762427304]
+emitting = false
+amount = 16
+texture = SubResource("AtlasTexture_vrp05")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_fc3n8")
