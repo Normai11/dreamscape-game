@@ -10,13 +10,16 @@ const searchPath : String = "res://assets/roomGen/rooms/roomCFG/"
 @export var generationPosition : Vector2 = Vector2.ZERO
 @export var setSeed : bool = false
 @export var genSeed : int
+@export_group("Conditions")
 @export var doRegularCleanup : bool = false
+@export var trialInterval : int = 14
 @export var maxAttempts : int = 32
 @export var roomNum : int = 5
 
 var RNG : RandomNumberGenerator = RandomNumberGenerator.new()
 var spaceState : PhysicsDirectSpaceState2D
 var roomCFGlist : Array[RoomConfiguration] = []
+var trialRoomList : Array[RoomConfiguration] = []
 var roomWeights : Array[float] = []
 var instantiatedRoomList : Array[Room] = []
 var existentRoomList : Array[Room] = []
@@ -61,6 +64,8 @@ func generate_rooms() -> void:
 	var successes : int = 0
 	for room in roomNum:
 		var roomReference : RoomConfiguration = roll_room()
+		if room % trialInterval == 0 && room > 0:
+			roomReference = trialRoomList[randi_range(0, trialRoomList.size() - 1)]
 		var calcFinalPos : Vector2 = Vector2.ZERO
 		calcFinalPos = calculate_final_pos(roomReference)
 		var physicsQuery = set_query_data(roomReference, calcFinalPos)
@@ -148,7 +153,10 @@ func get_roomCFGs() -> Array[RoomConfiguration]:
 	for file in files:
 		var loadCheck = load(searchPath + "/" + file)
 		if loadCheck is RoomConfiguration:
-			returningArray.append(loadCheck)
+			if loadCheck.isTrial:
+				trialRoomList.append(loadCheck)
+			else:
+				returningArray.append(loadCheck)
 		else:
 			loadCheck.free()
 	return returningArray

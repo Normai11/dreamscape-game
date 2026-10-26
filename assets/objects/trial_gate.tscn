@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cnpynrjrs8my1"]
+
+[ext_resource type="Script" uid="uid://bjjolqq5xqi8g" path="res://assets/objects/trial_gate.gd" id="1_e0tkx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3n8"]
+size = Vector2(28, 86)
+
+[node name="trialGate" type="StaticBody2D" unique_id=861080541]
+collision_mask = 0
+script = ExtResource("1_e0tkx")
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=1885327832]
+shape = SubResource("RectangleShape2D_fc3n8")
+debug_color = Color(0, 0, 1, 0.41960785)

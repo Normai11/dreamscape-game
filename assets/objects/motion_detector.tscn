@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dsa8qmlcm6cfy"]
+
+[ext_resource type="Script" uid="uid://b1najpr7xlwal" path="res://assets/objects/motion_detector.gd" id="1_7divm"]
+[ext_resource type="Texture2D" uid="uid://i87naupjxf06" path="res://assets/objects/motiondetector.png" id="1_cc6uy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7divm"]
+resource_local_to_scene = true
+atlas = ExtResource("1_cc6uy")
+region = Rect2(0, 0, 160, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ch445"]
+resource_local_to_scene = true
+size = Vector2(72, 72)
+
+[node name="MotionDetector" type="Area2D" unique_id=2074111429]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_7divm")
+
+[node name="texture" type="TextureRect" parent="." unique_id=1543592447]
+z_index = -2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -15.0
+offset_right = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_7divm")
+expand_mode = 1
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=492897741]
+shape = SubResource("RectangleShape2D_ch445")
+debug_color = Color(0, 0.77254903, 0.41960785, 0.14509805)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

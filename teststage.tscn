@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bfvj6cx84cexq" path="res://assets/Player/player.tscn" id="1_i4mmp"]
 [ext_resource type="Script" uid="uid://c63xb8ot48d2" path="res://assets/objects/advanced_camera.gd" id="2_26xia"]
+[ext_resource type="PackedScene" uid="uid://dsa8qmlcm6cfy" path="res://assets/objects/motion_detector.tscn" id="4_78mhe"]
 [ext_resource type="PackedScene" uid="uid://bh1w36nsqvgsn" path="res://assets/roomGen/roomManager.tscn" id="7_abapv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8n54"]
@@ -43,14 +44,24 @@ polygon = PackedVector2Array(-450, -418, -547, -76, -87, -76)
 [node name="roomManager" parent="." unique_id=1508716217 instance=ExtResource("7_abapv")]
 position = Vector2(-529, 1157)
 generateOnReady = true
-genSeed = 25
-roomNum = 30
+setSeed = true
+trialInterval = 5
+roomNum = 50
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(-293, 1126)
+position = Vector2(-441, 1153)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
 limit_enabled = false
 script = ExtResource("2_26xia")
 cameraTarget = NodePath("../Player")
+
+[node name="MotionDetector" parent="." unique_id=2074111429 instance=ExtResource("4_78mhe")]
+position = Vector2(-632, 446)
+
+[node name="MotionDetector2" parent="." unique_id=1055845021 instance=ExtResource("4_78mhe")]
+position = Vector2(-387, 446)
+
+[node name="MotionDetector3" parent="." unique_id=1884763635 instance=ExtResource("4_78mhe")]
+position = Vector2(-501, 410)

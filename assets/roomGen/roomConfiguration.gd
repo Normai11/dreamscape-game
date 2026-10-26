@@ -8,6 +8,7 @@ extends Resource
 @export var roomLinkPosition : Vector2
 @export var roomEnterPosition : Vector2
 @export_group("Identity")
+@export var isTrial : bool = false
 @export var roomScene : PackedScene
 @export var zoneRestriction : Array[int]
 @export var customMargin : Vector2

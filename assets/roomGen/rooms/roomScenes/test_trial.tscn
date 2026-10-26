@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bin12byns1ni6"]
+
+[ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_v68sy"]
+[ext_resource type="PackedScene" uid="uid://dsa8qmlcm6cfy" path="res://assets/objects/motion_detector.tscn" id="2_8mmva"]
+[ext_resource type="PackedScene" uid="uid://cnpynrjrs8my1" path="res://assets/objects/trial_gate.tscn" id="3_8mmva"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h11j3"]
+size = Vector2(755, 319)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mmva"]
+size = Vector2(811, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3tf7f"]
+size = Vector2(811, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn043"]
+size = Vector2(28, 250)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1l45o"]
+size = Vector2(28, 245)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iv3vw"]
+size = Vector2(420, 12)
+
+[node name="testTrial" type="Node2D" unique_id=1686933274 node_paths=PackedStringArray("generationDetectArea", "linkObj")]
+script = ExtResource("1_v68sy")
+generationDetectArea = NodePath("genDetect")
+linkObj = NodePath("exit")
+metadata/_custom_type_script = "uid://k1php2ihsd34"
+
+[node name="genDetect" type="Area2D" parent="." unique_id=157339507]
+position = Vector2(584, 255)
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="size" type="CollisionShape2D" parent="genDetect" unique_id=900880648]
+position = Vector2(-178.5, -51.5)
+shape = SubResource("RectangleShape2D_h11j3")
+debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=280211299]
+position = Vector2(584, 385)
+
+[node name="shape" type="CollisionShape2D" parent="solid" unique_id=1609043844]
+position = Vector2(-178.5, -11)
+shape = SubResource("RectangleShape2D_8mmva")
+
+[node name="solid2" type="StaticBody2D" parent="." unique_id=113344243]
+position = Vector2(584, 22)
+
+[node name="shape" type="CollisionShape2D" parent="solid2" unique_id=1584831832]
+position = Vector2(-178.5, 11)
+shape = SubResource("RectangleShape2D_3tf7f")
+
+[node name="solid3" type="StaticBody2D" parent="." unique_id=1243708791]
+position = Vector2(797, 105)
+
+[node name="shape" type="CollisionShape2D" parent="solid3" unique_id=1159096076]
+position = Vector2(0, 47)
+shape = SubResource("RectangleShape2D_pn043")
+
+[node name="solid4" type="StaticBody2D" parent="." unique_id=581647293]
+position = Vector2(14, 105)
+
+[node name="shape" type="CollisionShape2D" parent="solid4" unique_id=1427586829]
+position = Vector2(0, 49.5)
+shape = SubResource("RectangleShape2D_1l45o")
+
+[node name="semisolid" type="StaticBody2D" parent="." unique_id=1929083490]
+position = Vector2(405, 374)
+
+[node name="shape" type="CollisionShape2D" parent="semisolid" unique_id=1890385536]
+shape = SubResource("RectangleShape2D_iv3vw")
+one_way_collision = true
+debug_color = Color(0.6449831, 0.5228027, 0, 0.41960785)
+
+[node name="exit" type="Marker2D" parent="." unique_id=467866658]
+position = Vector2(811, 363)
+
+[node name="enter" type="Marker2D" parent="." unique_id=44430609]
+position = Vector2(0, 363)
+
+[node name="MotionDetector" parent="." unique_id=2074111429 instance=ExtResource("2_8mmva")]
+position = Vector2(406, 232)
+
+[node name="MotionDetector2" parent="." unique_id=2137987343 instance=ExtResource("2_8mmva")]
+position = Vector2(183, 300)
+
+[node name="MotionDetector3" parent="." unique_id=335466577 instance=ExtResource("2_8mmva")]
+position = Vector2(639, 305)
+
+[node name="trialGate" parent="." unique_id=861080541 node_paths=PackedStringArray("triggers") instance=ExtResource("3_8mmva")]
+position = Vector2(797, 320)
+triggers = [NodePath("../MotionDetector"), NodePath("../MotionDetector2"), NodePath("../MotionDetector3")]
