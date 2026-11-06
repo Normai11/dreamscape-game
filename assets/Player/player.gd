@@ -13,12 +13,13 @@ extends CharacterBody2D
 @export_group("Movement")
 @export var acceleration : float = 10.0
 @export var deceleration : float = 10.0
-@export var airMultiplier : float = 0.177
+@export var airMultiplier : float = 0.122
 @export var baseSpeed : float = 462.5
 @export var baseSprint : float = 800.0
 @export var bHopAdditive : float = 42.0
 @export var jumpHeight : float = 720.0
 @export_group("State Exports")
+@export var movingStates : Array[State]
 @export var noclipSpeed : float = 600
 @export var crouchSpeed : float = 325.0
 @export var crouchSprint : float = 462.5
@@ -49,6 +50,12 @@ func add_commands() -> void:
 
 func _process(_delta: float) -> void:
 	$debugSpeed.text = str(velocity)
+
+func is_moving() -> bool:
+	if movingStates.has(stateMachine.currentState):
+		return true
+	else:
+		return false
 
 func get_jump() -> bool:
 	if is_on_floor() or curCoyote >= 0:

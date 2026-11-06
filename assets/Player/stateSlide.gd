@@ -9,6 +9,8 @@ func enter() -> void:
 	player.collisionStand.disabled = true
 	if abs(player.velocity.x) <= player.slideStartMin:
 		curSpeed = player.slideStartMin * player.direction
+	else:
+		player.velocity.x = abs(player.velocity.x) * player.direction
 	player.abilityUsed = false
 
 func physics_update(delta) -> void:

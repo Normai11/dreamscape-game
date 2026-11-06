@@ -7,6 +7,8 @@ extends Node2D
 @export var editorObjects : Array[Node]
 @export var linkObj : Marker2D
 
+var cleanupOrder : int = 0
+
 func _ready() -> void:
 	if deleteObjects:
 		for obj in editorObjects:

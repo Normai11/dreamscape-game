@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Console="*uid://ouiu5xh1cs8n"
+DataStore="*uid://dcp3a6jrcnb0u"
 
 [editor_plugins]
 
@@ -72,6 +73,7 @@ interact={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=1785.0
 
 [rendering]
 

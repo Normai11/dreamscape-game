@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://x1ub6tsavyb1"]
+
+[ext_resource type="Script" uid="uid://bpd8svdfymq6d" path="res://assets/components/flip_component.gd" id="1_0i564"]
+
+[node name="perfectFlipComponent" type="Node" unique_id=1895370878]
+script = ExtResource("1_0i564")

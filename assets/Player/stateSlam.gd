@@ -17,7 +17,9 @@ func physics_update(delta) -> void:
 	if player.breakRay.is_colliding():
 		var collider = player.breakRay.get_collider()
 		if collider is Destroyable:
-			collider.destroy()
+			collider.destroy(self.name)
+		elif collider is GateTrigger:
+			collider.trigger()
 	
 	player.velocity.y += player.gravity * delta
 	player.move_and_slide()
@@ -33,7 +35,7 @@ func check_transitions() -> void:
 		transitioned.emit(self, "move")
 
 func exit() -> void:
-	player.velocity.y = -player.jumpHeight/1.5
+	#player.velocity.y = -player.jumpHeight/1.5
 	player.velocity.x = exitSpeed * player.direction
 	player.breakRay.enabled = false
 	player.set_collision_mask_value(4, true)

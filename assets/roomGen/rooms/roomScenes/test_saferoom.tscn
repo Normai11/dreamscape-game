@@ -1,0 +1,78 @@
+[gd_scene format=3 uid="uid://cshlqxe2gi4g3"]
+
+[ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_w7ig0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ca62"]
+size = Vector2(744, 276)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcr2n"]
+size = Vector2(800, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_83xg0"]
+size = Vector2(594, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1wuyu"]
+size = Vector2(28, 212)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2jyw"]
+size = Vector2(28, 299)
+
+[node name="test_saferoom" type="Node2D" unique_id=718704156 node_paths=PackedStringArray("generationDetectArea", "editorObjects", "linkObj")]
+script = ExtResource("1_w7ig0")
+generationDetectArea = NodePath("genDetect")
+editorObjects = [NodePath("exit"), NodePath("enter")]
+linkObj = NodePath("exit")
+metadata/_custom_type_script = "uid://k1php2ihsd34"
+
+[node name="genDetect" type="Area2D" parent="." unique_id=1463885539]
+position = Vector2(584, 255)
+collision_layer = 512
+collision_mask = 0
+monitoring = false
+
+[node name="size" type="CollisionShape2D" parent="genDetect" unique_id=1193026773]
+position = Vector2(-184, -73)
+shape = SubResource("RectangleShape2D_2ca62")
+debug_color = Color(0.61960787, 0, 0.43137255, 0.15686275)
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=701427548]
+position = Vector2(584, 342)
+
+[node name="shape" type="CollisionShape2D" parent="solid" unique_id=600869269]
+position = Vector2(-184, -11)
+shape = SubResource("RectangleShape2D_gcr2n")
+
+[node name="solid2" type="StaticBody2D" parent="." unique_id=1304903956]
+position = Vector2(584, 22)
+
+[node name="shape" type="CollisionShape2D" parent="solid2" unique_id=929906631]
+position = Vector2(-100, 11)
+shape = SubResource("RectangleShape2D_83xg0")
+
+[node name="solid3" type="StaticBody2D" parent="." unique_id=1811920504]
+position = Vector2(786, 62)
+
+[node name="shape" type="CollisionShape2D" parent="solid3" unique_id=622294045]
+position = Vector2(0, 66)
+shape = SubResource("RectangleShape2D_1wuyu")
+
+[node name="solid4" type="StaticBody2D" parent="." unique_id=1793681057]
+position = Vector2(14, 62)
+
+[node name="shape" type="CollisionShape2D" parent="solid4" unique_id=1212220734]
+position = Vector2(0, 109.5)
+shape = SubResource("RectangleShape2D_b2jyw")
+
+[node name="exit" type="Marker2D" parent="." unique_id=1654268025]
+position = Vector2(800, 320)
+
+[node name="enter" type="Marker2D" parent="." unique_id=1922635103]
+position = Vector2(107.5, 22)
+
+[node name="Label" type="Label" parent="." unique_id=118673879]
+offset_left = 88.0
+offset_top = 182.0
+offset_right = 361.0
+offset_bottom = 227.0
+theme_override_font_sizes/font_size = 32
+text = "this is a saferoom"

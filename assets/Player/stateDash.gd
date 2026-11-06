@@ -17,7 +17,7 @@ func physics_update(delta) -> void:
 	if player.breakRay.is_colliding():
 		var collider = player.breakRay.get_collider()
 		if collider is Destroyable:
-			collider.destroy()
+			collider.destroy(self.name)
 	
 	dashTimer += delta
 	

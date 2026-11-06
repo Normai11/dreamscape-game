@@ -6,6 +6,5 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		activated = true
-		triggerActivated.emit()
+		trigger()
 		$texture.texture.region = Rect2(160, 0, 160, 160)

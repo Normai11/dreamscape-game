@@ -97,6 +97,7 @@ rotation = 1.5707964
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_o5afo")
+requiredStateName = "slam"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" unique_id=1274333562]
 position = Vector2(0, -51.5)

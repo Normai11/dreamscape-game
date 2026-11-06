@@ -1,0 +1,205 @@
+[gd_scene format=3 uid="uid://dyh4e6iwoox02"]
+
+[ext_resource type="Texture2D" uid="uid://dka0sj2r6pyeo" path="res://assets/mods/stoplyteSpritesheet.png" id="1_dne2q"]
+[ext_resource type="Script" uid="uid://cngciep2qligv" path="res://assets/mods/stoplyte.gd" id="1_lcxr4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fc3n8"]
+atlas = ExtResource("1_dne2q")
+region = Rect2(220, 0, 220, 220)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dne2q"]
+atlas = ExtResource("1_dne2q")
+region = Rect2(0, 0, 220, 220)
+
+[sub_resource type="Animation" id="Animation_lcxr4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-75, -75)]
+}
+
+[sub_resource type="Animation" id="Animation_bbtdo"]
+resource_name = "drop"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(-75, -75), Vector2(-75, 180)]
+}
+
+[sub_resource type="Animation" id="Animation_vondl"]
+resource_name = "rise"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(-75, 180), Vector2(-75, -75)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.23333333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0],
+"method": &"set_color"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vondl"]
+_data = {
+&"RESET": SubResource("Animation_lcxr4"),
+&"drop": SubResource("Animation_bbtdo"),
+&"rise": SubResource("Animation_vondl")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3n8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fc3n8"]
+radius = 18.0
+height = 76.0
+
+[node name="Stoplyte" type="Node2D" unique_id=635576485]
+script = ExtResource("1_lcxr4")
+phaseOff = Color(0.09411765, 0, 0.14509805, 1)
+phaseWake = Color(0.12745099, 0.8745098, 0.12156864, 1)
+phaseWarn = Color(1, 0.7265625, 0, 1)
+phaseAttack = Color(0.8745098, 0.12156863, 0.12156863, 1)
+
+[node name="Head" type="TextureRect" parent="." unique_id=9888733]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -75.0
+offset_top = -75.0
+offset_right = 75.0
+offset_bottom = 74.99997
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(75, 0)
+texture = SubResource("AtlasTexture_fc3n8")
+expand_mode = 1
+
+[node name="light" type="ColorRect" parent="Head" unique_id=1594154139]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -51.0
+offset_top = -51.0
+offset_right = 51.0
+offset_bottom = 51.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.09570878, 6.0067177e-05, 0.14486656, 1)
+
+[node name="thingy" type="TextureRect" parent="Head" unique_id=597500000]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = -221.0
+offset_right = 70.0
+offset_bottom = -71.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_dne2q")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=477332815]
+libraries/ = SubResource("AnimationLibrary_vondl")
+
+[node name="lock" type="StaticBody2D" parent="." unique_id=2018312702]
+process_mode = 4
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="lock" unique_id=114481251]
+shape = SubResource("RectangleShape2D_fc3n8")
+disabled = true
+
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1019418469]
+process_mode = 4
+visible = false
+position = Vector2(0, 10)
+node_a = NodePath("../lock")
+node_b = NodePath("../chain0")
+
+[node name="chain0" type="RigidBody2D" parent="." unique_id=405485658]
+process_mode = 4
+visible = false
+position = Vector2(0, 46)
+collision_layer = 0
+mass = 50.0
+
+[node name="shape" type="CollisionShape2D" parent="chain0" unique_id=776260347]
+shape = SubResource("CapsuleShape2D_fc3n8")
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="." unique_id=2077002470]
+process_mode = 4
+visible = false
+position = Vector2(0, 85)
+node_a = NodePath("../chain0")
+node_b = NodePath("../chain1")
+
+[node name="chain1" type="RigidBody2D" parent="." unique_id=1076054616]
+process_mode = 4
+visible = false
+position = Vector2(0, 123)
+collision_layer = 0
+mass = 75.0
+
+[node name="shape" type="CollisionShape2D" parent="chain1" unique_id=1817752654]
+shape = SubResource("CapsuleShape2D_fc3n8")
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="." unique_id=642165735]
+process_mode = 4
+visible = false
+position = Vector2(0, 162)
+node_a = NodePath("../chain1")
+node_b = NodePath("../chain2")
+
+[node name="chain2" type="RigidBody2D" parent="." unique_id=1515669188]
+process_mode = 4
+visible = false
+position = Vector2(0, 200)
+collision_layer = 0
+mass = 275.0
+gravity_scale = 1.75
+
+[node name="shape" type="CollisionShape2D" parent="chain2" unique_id=221808702]
+shape = SubResource("CapsuleShape2D_fc3n8")

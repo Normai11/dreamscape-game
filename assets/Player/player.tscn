@@ -20,13 +20,14 @@ height = 32.0
 radius = 16.0
 height = 64.0
 
-[node name="Player" type="CharacterBody2D" unique_id=692287280]
+[node name="Player" type="CharacterBody2D" unique_id=692287280 node_paths=PackedStringArray("movingStates")]
 collision_layer = 2
 collision_mask = 9
 floor_constant_speed = true
 floor_max_angle = 1.3089969
-floor_snap_length = 64.0
+floor_snap_length = 48.0
 script = ExtResource("1_7gujn")
+movingStates = [NodePath("StateMachine/Move"), NodePath("StateMachine/Slide"), NodePath("StateMachine/Dash"), NodePath("StateMachine/dashJump")]
 
 [node name="debugState" type="Label" parent="." unique_id=1599481162]
 anchors_preset = 8

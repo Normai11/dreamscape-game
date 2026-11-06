@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://jqhbo8iakpuk"]
+
+[ext_resource type="Script" uid="uid://bnda7wc5xeu6n" path="res://assets/objects/slam_button.gd" id="1_bfw40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3m5th"]
+resource_local_to_scene = true
+size = Vector2(136, 26)
+
+[node name="slamButton" type="Area2D" unique_id=1715723634]
+collision_layer = 8
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_bfw40")
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=1939618664]
+shape = SubResource("RectangleShape2D_3m5th")
+debug_color = Color(0, 0.77254903, 0.41960785, 0.14509805)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2088833436]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -5.0
+offset_right = 20.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

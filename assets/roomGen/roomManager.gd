@@ -12,20 +12,25 @@ const searchPath : String = "res://assets/roomGen/rooms/roomCFG/"
 @export var genSeed : int
 @export_group("Conditions")
 @export var doRegularCleanup : bool = false
+## How many saferooms to generate before cleaning up old rooms.
+@export var cleanupInterval : int = 1
 @export var trialInterval : int = 14
 @export var maxAttempts : int = 32
 @export var roomNum : int = 5
 
 var RNG : RandomNumberGenerator = RandomNumberGenerator.new()
 var spaceState : PhysicsDirectSpaceState2D
+var drawFill : bool = false
+var genDirection : int = 1
+var drawshapelist : Array[Rect2]
+
 var roomCFGlist : Array[RoomConfiguration] = []
 var trialRoomList : Array[RoomConfiguration] = []
+var exitRoomList : Array[RoomConfiguration] = []
+var saferoomList : Array[RoomConfiguration] = []
 var roomWeights : Array[float] = []
 var instantiatedRoomList : Array[Room] = []
 var existentRoomList : Array[Room] = []
-var drawshapelist : Array[Rect2]
-var drawFill : bool = false
-var genDirection : int = 1
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -45,7 +50,8 @@ func _ready() -> void:
 
 func add_commands() -> void:
 	Console.add_command("generate_rooms", generate_rooms, [], 0, "Calls the RoomManager to start generating rooms")
-	Console.add_command("set_genPos", set_marker_pos, ["x", "y"], 2, "butt")
+	Console.add_command("set_genPos", set_marker_pos, ["x", "y"], 2, "Sets the generation starting position")
+	Console.add_command("get_genSeed", get_seed, [], 0, "Gets the seed that this roomManager is using")
 
 func roll_room() -> RoomConfiguration:
 	if roomCFGlist:
@@ -54,18 +60,15 @@ func roll_room() -> RoomConfiguration:
 		return null
 
 func generate_rooms() -> void:
-	if instantiatedRoomList:
-		for room in instantiatedRoomList:
-			room.queue_free()
-		instantiatedRoomList.clear()
+	Console.print_info("Generating rooms... maxAttempts: %d | roomNum: %d, Seed: %d" % [maxAttempts, roomNum, RNG.seed])
 	
-	Console.print_info("Generating rooms... maxAttempts: %d | roomNum: %d" % [maxAttempts, roomNum])
+	cleanup_old_rooms()
 	
 	var successes : int = 0
 	for room in roomNum:
 		var roomReference : RoomConfiguration = roll_room()
 		if room % trialInterval == 0 && room > 0:
-			roomReference = trialRoomList[randi_range(0, trialRoomList.size() - 1)]
+			roomReference = trialRoomList[RNG.randi_range(0, trialRoomList.size() - 1)]
 		var calcFinalPos : Vector2 = Vector2.ZERO
 		calcFinalPos = calculate_final_pos(roomReference)
 		var physicsQuery = set_query_data(roomReference, calcFinalPos)
@@ -96,16 +99,33 @@ func generate_rooms() -> void:
 		else:
 			drawFill = true
 		#print(result)
-		var drawRect = Rect2((posMarker.position + calcFinalPos) - roomReference.roomSize/2, physicsQuery.shape.size)
-		drawshapelist.append(drawRect)
-		queue_redraw()
+		#var drawRect = Rect2((posMarker.position + calcFinalPos) - roomReference.roomSize/2, physicsQuery.shape.size)
+		#drawshapelist.append(drawRect)
+		#queue_redraw()
 	Console.print_info("Generation finished! Rooms placed: %d / %d" % [successes, roomNum])
 	
+	place_exit()
 	cleanup_room_areas()
+
+func place_exit() -> void:
+	var exitRoom = exitRoomList[RNG.randi_range(0, exitRoomList.size() - 1)]
+	var saferoom = saferoomList[RNG.randi_range(0, saferoomList.size() - 1)]
+	#var calcFinalPos : Vector2 = calculate_final_pos(exitRoom)
+	place_room(exitRoom)
+	genDirection = (saferoom.forceGenDirection if saferoom.forceGenDirection != 0 else genDirection)
+	place_room(saferoom)
 
 func cleanup_room_areas() -> void:
 	for room in instantiatedRoomList:
 		room.free_generation_object()
+
+func cleanup_old_rooms() -> void:
+	if instantiatedRoomList:
+		for room in instantiatedRoomList:
+			room.cleanupOrder -= 1
+			if room.cleanupOrder <= 0:
+				instantiatedRoomList.erase(room)
+				room.queue_free()
 
 func set_query_data(roomReference : RoomConfiguration, calculated : Vector2) -> PhysicsShapeQueryParameters2D:
 	var query : PhysicsShapeQueryParameters2D = PhysicsShapeQueryParameters2D.new()
@@ -135,6 +155,7 @@ func calculate_final_pos(roomReference : RoomConfiguration) -> Vector2:
 func place_room(data : RoomConfiguration) -> void:
 	var instance : Room = data.roomScene.instantiate()
 	instance.global_position = posMarker.position - data.roomEnterPosition# * genDirection
+	instance.cleanupOrder = cleanupInterval
 	if genDirection == -1:
 		instance.scale.x = -1
 	add_child(instance)
@@ -143,8 +164,8 @@ func place_room(data : RoomConfiguration) -> void:
 	posMarker.global_position = instance.linkObj.global_position
 	if data.flipGeneration:
 		genDirection = -genDirection
-		if doRegularCleanup:
-			cleanup_room_areas()
+		#if doRegularCleanup:
+			#cleanup_room_areas()
 
 func get_roomCFGs() -> Array[RoomConfiguration]:
 	var search := DirAccess.open(searchPath)
@@ -153,8 +174,12 @@ func get_roomCFGs() -> Array[RoomConfiguration]:
 	for file in files:
 		var loadCheck = load(searchPath + "/" + file)
 		if loadCheck is RoomConfiguration:
-			if loadCheck.isTrial:
+			if loadCheck.roomType == 1:
 				trialRoomList.append(loadCheck)
+			elif loadCheck.roomType == 2:
+				exitRoomList.append(loadCheck)
+			elif loadCheck.roomType == 3:
+				saferoomList.append(loadCheck)
 			else:
 				returningArray.append(loadCheck)
 		else:
@@ -163,6 +188,9 @@ func get_roomCFGs() -> Array[RoomConfiguration]:
 
 func set_marker_pos(x : String, y : String) -> void:
 	posMarker.global_position = Vector2(float(x), float(y))
+
+func get_seed() -> void:
+	Console.print_info("Seed is %d" % [RNG.seed])
 
 func _draw() -> void:
 	for i in drawshapelist:
