@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cshlqxe2gi4g3"]
 
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_w7ig0"]
+[ext_resource type="PackedScene" uid="uid://dfnj0pam7funi" path="res://assets/objects/multi_door.tscn" id="2_2ca62"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ca62"]
 size = Vector2(744, 276)
@@ -76,3 +77,11 @@ offset_right = 361.0
 offset_bottom = 227.0
 theme_override_font_sizes/font_size = 32
 text = "this is a saferoom"
+
+[node name="multiDoor" parent="." unique_id=1640478881 instance=ExtResource("2_2ca62")]
+position = Vector2(786, 277)
+doorType = 1
+
+[node name="multiDoor2" parent="." unique_id=308627693 instance=ExtResource("2_2ca62")]
+position = Vector2(785, 61)
+doorType = 0

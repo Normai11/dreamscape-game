@@ -17,7 +17,10 @@ func physics_update(delta) -> void:
 	if player.breakRay.is_colliding():
 		var collider = player.breakRay.get_collider()
 		if collider is Destroyable:
-			collider.destroy(self.name)
+			if collider.requiredStateName.to_lower() == self.name.to_lower():
+				collider.destroy()
+			else:
+				player.set_collision_mask_value(4, true)
 		elif collider is GateTrigger:
 			collider.trigger()
 	

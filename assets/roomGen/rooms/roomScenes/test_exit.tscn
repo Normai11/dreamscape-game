@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_3tcea"]
 [ext_resource type="PackedScene" uid="uid://x1ub6tsavyb1" path="res://assets/components/flip_component.tscn" id="2_yie1j"]
+[ext_resource type="PackedScene" uid="uid://c8blscgo2mbk5" path="res://assets/objects/exit_hatch.tscn" id="3_yvifv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yie1j"]
 size = Vector2(513, 276)
@@ -64,6 +65,20 @@ position = Vector2(555, 62)
 position = Vector2(0, 109.5)
 shape = SubResource("RectangleShape2D_36bmi")
 
+[node name="solid5" type="StaticBody2D" parent="." unique_id=1749079034]
+position = Vector2(526, 362)
+
+[node name="shape" type="CollisionShape2D" parent="solid5" unique_id=1026571339]
+position = Vector2(0, 109.5)
+shape = SubResource("RectangleShape2D_36bmi")
+
+[node name="solid6" type="StaticBody2D" parent="." unique_id=1065457328]
+position = Vector2(397, 361)
+
+[node name="shape" type="CollisionShape2D" parent="solid6" unique_id=1286203412]
+position = Vector2(0, 109.5)
+shape = SubResource("RectangleShape2D_36bmi")
+
 [node name="exit" type="Marker2D" parent="." unique_id=1569165329]
 position = Vector2(461.5, 656)
 
@@ -79,3 +94,6 @@ theme_override_font_sizes/font_size = 32
 text = "this is the exit"
 
 [node name="perfectFlipComponent" parent="Label" unique_id=1895370878 instance=ExtResource("2_yie1j")]
+
+[node name="exitHatch" parent="." unique_id=1054900612 instance=ExtResource("3_yvifv")]
+position = Vector2(462, 281)

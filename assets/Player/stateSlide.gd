@@ -7,6 +7,8 @@ func enter() -> void:
 	player = machine.get_parent()
 	player.collisionCrouch.disabled = false
 	player.collisionStand.disabled = true
+	player.breakRay.enabled = true
+	player.set_collision_mask_value(4, false)
 	if abs(player.velocity.x) <= player.slideStartMin:
 		curSpeed = player.slideStartMin * player.direction
 	else:
@@ -15,6 +17,14 @@ func enter() -> void:
 
 func physics_update(delta) -> void:
 	player.curCoyote -= 1
+	
+	if player.breakRay.is_colliding():
+		var collider = player.breakRay.get_collider()
+		if collider is Destroyable:
+			if collider.requiredStateName.to_lower() == self.name.to_lower():
+				collider.destroy()
+			else:
+				player.set_collision_mask_value(4, true)
 	
 	if player.is_on_wall():
 		if player.doBonkPenalty:
@@ -54,3 +64,5 @@ func jump() -> void:
 func exit() -> void:
 	player.collisionCrouch.disabled = true
 	player.collisionStand.disabled = false
+	player.set_collision_mask_value(4, true)
+	player.breakRay.enabled = false

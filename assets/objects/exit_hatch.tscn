@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c8blscgo2mbk5"]
+
+[ext_resource type="Script" uid="uid://c618e1xbu0cjy" path="res://assets/objects/exit_hatch.gd" id="1_b3y26"]
+[ext_resource type="Script" uid="uid://b6tv7t6i0kcvv" path="res://assets/objects/destroyable.gd" id="2_b4ihs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3n8"]
+size = Vector2(116, 86)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b3y26"]
+size = Vector2(100, 89)
+
+[node name="exitHatch" type="Area2D" unique_id=1054900612]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_b3y26")
+interactPrompt = "Open Hatch"
+oneshot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1545601515]
+shape = SubResource("RectangleShape2D_fc3n8")
+debug_color = Color(0, 0.70196074, 0.45517766, 0.41960785)
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=742383400]
+position = Vector2(0, 28)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("2_b4ihs")
+requiredStateName = "slam"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=1810835621]
+position = Vector2(0, 34.5)
+shape = SubResource("RectangleShape2D_b3y26")

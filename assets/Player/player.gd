@@ -5,6 +5,7 @@ extends CharacterBody2D
 @onready var collisionStand : CollisionShape2D = $Stand
 @onready var collisionCrouch : CollisionShape2D = $Crouch
 @onready var breakRay : RayCast2D = $breakRay
+@onready var interactRay : RayCast2D = $interactRay
 
 @export var gravity : float = 1785.0
 @export var maxHits : int = 3
@@ -20,6 +21,7 @@ extends CharacterBody2D
 @export var jumpHeight : float = 720.0
 @export_group("State Exports")
 @export var movingStates : Array[State]
+@export var interactionStates : Array[State]
 @export var noclipSpeed : float = 600
 @export var crouchSpeed : float = 325.0
 @export var crouchSprint : float = 462.5
@@ -32,6 +34,7 @@ extends CharacterBody2D
 @export var dashDuration : float = 0.42
 
 const breakRayMinReach : float = 64.0
+const interactRayLength : float = 80.0
 
 var direction : int = 1
 var curCoyote : int = 0
@@ -48,11 +51,26 @@ func add_commands() -> void:
 	Console.add_command("set_stat", set_attribute, ["statName", "value", "type"], 3, "Set specific player attribute value")
 	Console.add_command_autocomplete_list("set_stat", get_property_names())
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	$debugSpeed.text = str(velocity)
+	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakRay.enabled, get_can_interact() && interactRay.is_colliding()]
+	interactRay.target_position.x = interactRayLength * direction
+	
+	if get_can_interact():
+		var collider = interactRay.get_collider()
+		if collider:
+			if collider is Interactable:
+				if Input.is_action_just_pressed("interact"):
+					collider._interacted()
 
 func is_moving() -> bool:
 	if movingStates.has(stateMachine.currentState):
+		return true
+	else:
+		return false
+
+func get_can_interact() -> bool:
+	if interactionStates.has(stateMachine.currentState):
 		return true
 	else:
 		return false

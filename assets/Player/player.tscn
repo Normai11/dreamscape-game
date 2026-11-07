@@ -20,7 +20,7 @@ height = 32.0
 radius = 16.0
 height = 64.0
 
-[node name="Player" type="CharacterBody2D" unique_id=692287280 node_paths=PackedStringArray("movingStates")]
+[node name="Player" type="CharacterBody2D" unique_id=692287280 node_paths=PackedStringArray("movingStates", "interactionStates")]
 collision_layer = 2
 collision_mask = 9
 floor_constant_speed = true
@@ -28,6 +28,7 @@ floor_max_angle = 1.3089969
 floor_snap_length = 48.0
 script = ExtResource("1_7gujn")
 movingStates = [NodePath("StateMachine/Move"), NodePath("StateMachine/Slide"), NodePath("StateMachine/Dash"), NodePath("StateMachine/dashJump")]
+interactionStates = [NodePath("StateMachine/Idle"), NodePath("StateMachine/Move"), NodePath("StateMachine/Crouch"), NodePath("StateMachine/dashJump"), NodePath("StateMachine/Bonk"), NodePath("StateMachine/NOCLIP")]
 
 [node name="debugState" type="Label" parent="." unique_id=1599481162]
 anchors_preset = 8
@@ -55,6 +56,20 @@ grow_horizontal = 2
 grow_vertical = 2
 vertical_alignment = 1
 
+[node name="debugRays" type="RichTextLabel" parent="." unique_id=1156499512]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = -144.0
+offset_right = 324.0
+offset_bottom = -90.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+vertical_alignment = 1
+
 [node name="Crouch" type="CollisionShape2D" parent="." unique_id=1233785737]
 position = Vector2(0, 16)
 shape = SubResource("CapsuleShape2D_674bt")
@@ -65,8 +80,17 @@ debug_color = Color(0.5665466, 0.39231595, 1, 0.41960785)
 shape = SubResource("CapsuleShape2D_fdrta")
 
 [node name="breakRay" type="RayCast2D" parent="." unique_id=422880315]
+modulate = Color(0.2421875, 0, 1, 1)
+enabled = false
 target_position = Vector2(64, 0)
 collision_mask = 8
+hit_from_inside = true
+collide_with_areas = true
+
+[node name="interactRay" type="RayCast2D" parent="." unique_id=850020827]
+position = Vector2(0, -11)
+target_position = Vector2(80, 0)
+collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 

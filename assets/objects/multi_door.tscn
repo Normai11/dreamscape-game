@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dfnj0pam7funi"]
+
+[ext_resource type="Script" uid="uid://5fm2i8utxnfe" path="res://assets/objects/multi_door.gd" id="1_iqxpi"]
+[ext_resource type="Script" uid="uid://b6tv7t6i0kcvv" path="res://assets/objects/destroyable.gd" id="2_1vasb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmkc6"]
+size = Vector2(76, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iqxpi"]
+size = Vector2(28, 86)
+
+[node name="multiDoor" type="Area2D" unique_id=1640478881]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_iqxpi")
+interactPrompt = "Open Door"
+oneshot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2147194536]
+shape = SubResource("RectangleShape2D_rmkc6")
+debug_color = Color(0, 0.7019608, 0.45490196, 0.41960785)
+
+[node name="solid" type="StaticBody2D" parent="." unique_id=926614330]
+position = Vector2(0, 28)
+collision_mask = 0
+script = ExtResource("2_1vasb")
+requiredStateName = "slide"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=1731133529]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_iqxpi")
+
+[node name="Timer" type="Timer" parent="." unique_id=1497300559]
+process_callback = 0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_countdown_end"]

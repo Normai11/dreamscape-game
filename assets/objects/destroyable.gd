@@ -5,8 +5,10 @@ extends PhysicsBody2D
 
 @export var requiredStateName : String = "dash"
 
-func destroy(stateName : String) -> void:
-	if stateName.to_lower() != requiredStateName.to_lower():
+var canBreak : bool = true
+
+func destroy() -> void:
+	if !canBreak:
 		return
 	var particle = destroyParticle.instantiate()
 	particle.global_position = self.global_position

@@ -8,12 +8,22 @@
 [ext_resource type="PackedScene" uid="uid://dyh4e6iwoox02" path="res://assets/mods/stoplyte.tscn" id="6_ux2pb"]
 [ext_resource type="PackedScene" uid="uid://bh1w36nsqvgsn" path="res://assets/roomGen/roomManager.tscn" id="7_abapv"]
 [ext_resource type="PackedScene" uid="uid://dwaxjnfisbepy" path="res://assets/objects/disco_beam.tscn" id="7_hcd8q"]
+[ext_resource type="Script" uid="uid://b6tv7t6i0kcvv" path="res://assets/objects/destroyable.gd" id="9_ajrww"]
+[ext_resource type="Script" uid="uid://mdu5d745wduf" path="res://assets/objects/interactable.gd" id="10_cs2e6"]
+[ext_resource type="PackedScene" uid="uid://c8blscgo2mbk5" path="res://assets/objects/exit_hatch.tscn" id="11_cs2e6"]
+[ext_resource type="PackedScene" uid="uid://dfnj0pam7funi" path="res://assets/objects/multi_door.tscn" id="12_p73gb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fc3n8"]
 viewport_path = NodePath("CanvasLayer/CanvasEnemies/SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8n54"]
 size = Vector2(1252, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fpwpd"]
+size = Vector2(52, 178)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cs2e6"]
+size = Vector2(52, 178)
 
 [node name="teststage" type="Node2D" unique_id=109890452]
 
@@ -76,7 +86,7 @@ cleanupInterval = 2
 trialInterval = 5
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(-461, 1115)
+position = Vector2(-461, 1143)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
@@ -98,3 +108,32 @@ position = Vector2(-1513, 194)
 
 [node name="discoBeam" parent="." unique_id=1416010634 instance=ExtResource("7_hcd8q")]
 position = Vector2(-667, 1015)
+
+[node name="StaticBody2D6" type="StaticBody2D" parent="." unique_id=999536299]
+position = Vector2(-142, 464)
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("9_ajrww")
+requiredStateName = "slide"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6" unique_id=1379061014]
+shape = SubResource("RectangleShape2D_fpwpd")
+debug_color = Color(0.8678633, 0.0005458027, 0.85710365, 0.41960785)
+
+[node name="StaticBody2D7" type="StaticBody2D" parent="." unique_id=1405931331]
+position = Vector2(-839, 464)
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("10_cs2e6")
+interactPrompt = "my butt itch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7" unique_id=384143177]
+shape = SubResource("RectangleShape2D_cs2e6")
+debug_color = Color(0.8666667, 0.7109375, 0, 0.41960785)
+
+[node name="exitHatch" parent="." unique_id=1584370356 instance=ExtResource("11_cs2e6")]
+position = Vector2(-241, 514)
+
+[node name="multiDoor" parent="." unique_id=1640478881 instance=ExtResource("12_p73gb")]
+position = Vector2(-719, 514)
+doorType = 0
