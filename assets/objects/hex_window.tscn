@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://cuh8cn33ckrej"]
+
+[ext_resource type="Texture2D" uid="uid://ckyi1mskdjrmr" path="res://placeholders/hex_9grid_temp.png" id="1_kmxl0"]
+[ext_resource type="Script" uid="uid://bc1sbb82hocmo" path="res://assets/objects/hex_window.gd" id="2_r8ejq"]
+
+[sub_resource type="Curve" id="Curve_fc3n8"]
+_data = [Vector2(0, 1), 0.0, 5.376779, 0, 0, Vector2(0.2, 1), 0.0, -0.625, 0, 1, Vector2(1, 0.5), -0.625, 0.0, 1, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[node name="hexWindow" type="Control" unique_id=1341333692]
+z_index = 128
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("2_r8ejq")
+shrinkCurve = SubResource("Curve_fc3n8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1030217428]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(200, 200)
+mouse_filter = 0
+texture = ExtResource("1_kmxl0")
+patch_margin_left = 200
+patch_margin_top = 200
+patch_margin_right = 200
+patch_margin_bottom = 200

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cc7bb2kvpbygt"]
+
+[ext_resource type="Script" uid="uid://dvsxvp3d01ff7" path="res://assets/mods/hex.gd" id="1_y7w4o"]
+
+[node name="Hex" type="Node2D" unique_id=1101390194]
+script = ExtResource("1_y7w4o")
