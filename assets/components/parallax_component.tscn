@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dvvcqqjx117r5"]
+
+[ext_resource type="Script" uid="uid://ciah1ohysx4bd" path="res://assets/components/parallax_component.gd" id="1_0u4ad"]
+
+[node name="parallaxComponent" type="Node" unique_id=1190583793]
+script = ExtResource("1_0u4ad")
+oneshot = false
+metadata/_custom_type_script = "uid://bbpbwet3jr7t8"

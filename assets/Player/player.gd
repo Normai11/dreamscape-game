@@ -42,6 +42,7 @@ var abilityUsed : bool = false
 
 func _ready() -> void:
 	stateMachine.body_active()
+	set_debugTexture_visible("no")
 	add_commands()
 
 func add_commands() -> void:
@@ -50,10 +51,11 @@ func add_commands() -> void:
 	Console.add_command_autocomplete_list("set_state", stateMachine.states.keys())
 	Console.add_command("set_stat", set_attribute, ["statName", "value", "type"], 3, "Set specific player attribute value")
 	Console.add_command_autocomplete_list("set_stat", get_property_names())
+	Console.add_command("set_debugPlayer", set_debugTexture_visible, ["boolean"], 1, "Sets visibility of player testing texture.")
 
 func _physics_process(_delta: float) -> void:
-	$debugSpeed.text = str(velocity)
-	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakRay.enabled, get_can_interact() && interactRay.is_colliding()]
+	debug_junk()
+	
 	interactRay.target_position.x = interactRayLength * direction
 	
 	if get_can_interact():
@@ -62,6 +64,11 @@ func _physics_process(_delta: float) -> void:
 			if collider is Interactable:
 				if Input.is_action_just_pressed("interact"):
 					collider._interacted()
+
+func debug_junk() -> void:
+	$debugSpeed.text = str(velocity)
+	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakRay.enabled, get_can_interact() && interactRay.is_colliding()]
+	$TextureRect.flip_h = (true if direction == -1 else false)
 
 func is_moving() -> bool:
 	if movingStates.has(stateMachine.currentState):
@@ -116,3 +123,9 @@ func set_attribute(statName : String, value : String, type : String) -> void:
 				set(statName, true)
 			else:
 				set(statName, false)
+
+func set_debugTexture_visible(on : String) -> void:
+	if on.to_lower() == "true":
+		$TextureRect.visible = true
+	else:
+		$TextureRect.visible = false

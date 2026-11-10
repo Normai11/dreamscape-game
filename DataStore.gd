@@ -4,5 +4,3 @@ extends Node
 	"zone" : 0,
 	"mods" : []
 }
-
-var modScenes : Array = []

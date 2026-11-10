@@ -10,7 +10,7 @@ region = Rect2(0, 0, 160, 160)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ch445"]
 resource_local_to_scene = true
-size = Vector2(72, 72)
+size = Vector2(55, 55)
 
 [node name="MotionDetector" type="Area2D" unique_id=2074111429]
 collision_layer = 0

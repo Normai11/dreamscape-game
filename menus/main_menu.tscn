@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://xijeuc3q3asm"]
+
+[ext_resource type="PackedScene" uid="uid://dvvcqqjx117r5" path="res://assets/components/parallax_component.tscn" id="1_8gy84"]
+[ext_resource type="Script" uid="uid://bv5iyep234kxe" path="res://menus/main_menu.gd" id="1_a63lr"]
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://icon.svg" id="2_ij7vn"]
+[ext_resource type="Texture2D" uid="uid://bteh7tn48473e" path="res://placeholders/bg_wip_bg.png" id="3_yjgyn"]
+[ext_resource type="Texture2D" uid="uid://po452awbncki" path="res://placeholders/bg_wip_mg.png" id="4_oblsv"]
+[ext_resource type="Texture2D" uid="uid://3x6f3l1gemx0" path="res://placeholders/bg_wip_front.png" id="5_a63lr"]
+
+[node name="MainMenu" type="Control" unique_id=1364668351]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a63lr")
+
+[node name="testB" type="TextureRect" parent="." unique_id=1680799216]
+visible = false
+self_modulate = Color(1, 1, 1, 0.35300002)
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ij7vn")
+
+[node name="testM" type="TextureRect" parent="." unique_id=1189652930]
+visible = false
+self_modulate = Color(1, 1, 1, 0.35300002)
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ij7vn")
+
+[node name="parallaxComponent" parent="testM" unique_id=1138326850 instance=ExtResource("1_8gy84")]
+parallaxMultiplier = 0.015
+
+[node name="testF" type="TextureRect" parent="." unique_id=939190560]
+visible = false
+self_modulate = Color(1, 1, 1, 0.35300002)
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ij7vn")
+
+[node name="parallaxComponent" parent="testF" unique_id=2099161944 instance=ExtResource("1_8gy84")]
+parallaxMultiplier = 0.06
+
+[node name="bg" type="TextureRect" parent="." unique_id=1240710508]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.6499023
+offset_top = -2.0
+offset_right = 2.6499023
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_yjgyn")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="mg" type="TextureRect" parent="." unique_id=506710386]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.0
+offset_top = 19.0
+offset_right = 13.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_oblsv")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="parallaxComponent" parent="mg" unique_id=1430695744 instance=ExtResource("1_8gy84")]
+parallaxMultiplier = 0.015
+
+[node name="fg" type="Control" parent="." unique_id=1912864926]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="parallaxComponent" parent="fg" unique_id=446850629 instance=ExtResource("1_8gy84")]
+parallaxMultiplier = 0.065
+
+[node name="clouds" type="TextureRect" parent="fg" unique_id=97887901]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -76.0
+offset_top = -112.0
+offset_right = 80.0
+offset_bottom = 43.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_a63lr")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Button" type="Button" parent="fg" unique_id=482747213]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 217.0
+offset_right = 128.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "play game"
+
+[node name="Button2" type="Button" parent="fg" unique_id=593830508]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 289.0
+offset_top = 217.0
+offset_right = 545.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "exit
+"
+
+[node name="Button3" type="Button" parent="fg" unique_id=770709038]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -536.0
+offset_top = 217.0
+offset_right = -280.0
+offset_bottom = 297.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "option
+"

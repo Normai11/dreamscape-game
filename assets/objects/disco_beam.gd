@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 		for beam in beams:
 			if beam.is_colliding():
 				# damage function
-				pass
+				print("Beam Hit!")
 				#playerReference.damage_player()
 
 func create_beams() -> void:
@@ -79,7 +79,7 @@ func _beam_expire() -> void:
 	tween.set_parallel(true)
 	
 	for line in lines:
-		line.width = beamThickness * 8.5
+		line.width = beamThickness * 5.5
 		line.modulate.a = 1
 		tween.tween_property(line, "width", 0, 0.4)
 	

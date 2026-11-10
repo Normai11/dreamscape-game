@@ -32,7 +32,8 @@ func _process(delta: float) -> void:
 			curTimer += delta
 			
 			if Input.is_action_just_pressed("closeHexWindow"):
-				clear_window(windowChildren[0])
+				if !windowChildren.is_empty():
+					clear_window(windowChildren[0])
 			
 			if curTimer >= windowExpireTimer:
 				curTimer = appearInterval

@@ -3,10 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bfvj6cx84cexq" path="res://assets/Player/player.tscn" id="1_i4mmp"]
 [ext_resource type="Script" uid="uid://c63xb8ot48d2" path="res://assets/objects/advanced_camera.gd" id="2_26xia"]
 [ext_resource type="PackedScene" uid="uid://bex28ilbukvxj" path="res://assets/mods/disco.tscn" id="2_hcd8q"]
-[ext_resource type="PackedScene" uid="uid://cc7bb2kvpbygt" path="res://assets/mods/hex.tscn" id="3_aha85"]
 [ext_resource type="PackedScene" uid="uid://dsa8qmlcm6cfy" path="res://assets/objects/motion_detector.tscn" id="4_78mhe"]
 [ext_resource type="PackedScene" uid="uid://jqhbo8iakpuk" path="res://assets/objects/slam_button.tscn" id="5_7qlp3"]
-[ext_resource type="PackedScene" uid="uid://dyh4e6iwoox02" path="res://assets/mods/stoplyte.tscn" id="6_ux2pb"]
 [ext_resource type="PackedScene" uid="uid://bh1w36nsqvgsn" path="res://assets/roomGen/roomManager.tscn" id="7_abapv"]
 [ext_resource type="PackedScene" uid="uid://dwaxjnfisbepy" path="res://assets/objects/disco_beam.tscn" id="7_hcd8q"]
 [ext_resource type="Script" uid="uid://b6tv7t6i0kcvv" path="res://assets/objects/destroyable.gd" id="9_ajrww"]
@@ -19,6 +17,9 @@ viewport_path = NodePath("CanvasLayer/CanvasEnemies/SubViewport")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8n54"]
 size = Vector2(1252, 72)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p73gb"]
+size = Vector2(3024, 72)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpwpd"]
 size = Vector2(52, 178)
@@ -42,16 +43,11 @@ texture = SubResource("ViewportTexture_fc3n8")
 transparent_bg = true
 size = Vector2i(1152, 648)
 
-[node name="Stoplyte" parent="CanvasLayer/CanvasEnemies/SubViewport" unique_id=1257771728 node_paths=PackedStringArray("playerReference") instance=ExtResource("6_ux2pb")]
-position = Vector2(1000, -75)
-playerReference = NodePath("../../../../Player")
-
 [node name="Disco" parent="CanvasLayer/CanvasEnemies/SubViewport" unique_id=744629749 instance=ExtResource("2_hcd8q")]
-position = Vector2(800, 100)
-
-[node name="Hex" parent="CanvasLayer" unique_id=1101390194 instance=ExtResource("3_aha85")]
-windowCount = 3
-windowBounds = Vector4(170, 980, 170, 480)
+position = Vector2(1000, 100)
+fireCount = 100
+fireCooldown = 0.35
+beamNumber = 5
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2053145266]
 position = Vector2(-559, 584)
@@ -69,7 +65,8 @@ shape = SubResource("RectangleShape2D_e8n54")
 position = Vector2(972, 244)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5" unique_id=1810620912]
-shape = SubResource("RectangleShape2D_e8n54")
+position = Vector2(886, 0)
+shape = SubResource("RectangleShape2D_p73gb")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1104558403]
 position = Vector2(-904, 622)
@@ -92,13 +89,14 @@ trialInterval = 5
 roomNum = 30
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(-461, 1143)
+position = Vector2(1472, 121)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]
 limit_enabled = false
 script = ExtResource("2_26xia")
 cameraTarget = NodePath("../Player")
+cameraZoom = Vector2(0.9, 0.9)
 
 [node name="MotionDetector" parent="." unique_id=2074111429 instance=ExtResource("4_78mhe")]
 position = Vector2(-632, 446)
@@ -113,7 +111,7 @@ position = Vector2(-501, 410)
 position = Vector2(-1513, 194)
 
 [node name="discoBeam" parent="." unique_id=1416010634 instance=ExtResource("7_hcd8q")]
-position = Vector2(-667, 1015)
+position = Vector2(-2177, 379)
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="." unique_id=999536299]
 position = Vector2(-142, 464)
