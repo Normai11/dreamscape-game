@@ -9,7 +9,6 @@ point_count = 3
 metadata/_snap_enabled = true
 
 [node name="hexWindow" type="Control" unique_id=1341333692]
-z_index = 128
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 1
@@ -17,6 +16,7 @@ script = ExtResource("2_r8ejq")
 shrinkCurve = SubResource("Curve_fc3n8")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1030217428]
+z_index = 256
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

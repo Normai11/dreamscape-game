@@ -129,3 +129,10 @@ func set_debugTexture_visible(on : String) -> void:
 		$TextureRect.visible = true
 	else:
 		$TextureRect.visible = false
+
+
+func _entered_saferoom(area: Area2D) -> void:
+	GameManager.saferoom_trigger(true)
+
+func _exited_saferoom(area: Area2D) -> void:
+	GameManager.saferoom_trigger(false)

@@ -70,6 +70,9 @@ _data = {
 
 [node name="Disco" type="Node2D" unique_id=744629749]
 script = ExtResource("1_lbgwc")
+path = 2
+dataName = "disco"
+maxStack = 2
 
 [node name="body" type="TextureRect" parent="." unique_id=329207843]
 anchors_preset = 8

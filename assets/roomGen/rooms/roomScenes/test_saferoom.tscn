@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://k1php2ihsd34" path="res://assets/roomGen/room.gd" id="1_w7ig0"]
 [ext_resource type="PackedScene" uid="uid://dfnj0pam7funi" path="res://assets/objects/multi_door.tscn" id="2_2ca62"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ftu6n"]
+size = Vector2(864, 466)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2ca62"]
 size = Vector2(744, 276)
 
@@ -24,6 +27,18 @@ generationDetectArea = NodePath("genDetect")
 editorObjects = [NodePath("exit"), NodePath("enter")]
 linkObj = NodePath("exit")
 metadata/_custom_type_script = "uid://k1php2ihsd34"
+
+[node name="safeDetect" type="Area2D" parent="." unique_id=242387499]
+z_index = -3
+position = Vector2(399, 183)
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+
+[node name="size" type="CollisionShape2D" parent="safeDetect" unique_id=120446441]
+shape = SubResource("RectangleShape2D_ftu6n")
+disabled = true
+debug_color = Color(0.060012817, 0.80859375, 0.6682348, 0.15686275)
 
 [node name="genDetect" type="Area2D" parent="." unique_id=1463885539]
 position = Vector2(584, 255)

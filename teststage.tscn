@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://bfvj6cx84cexq" path="res://assets/Player/player.tscn" id="1_i4mmp"]
 [ext_resource type="Script" uid="uid://c63xb8ot48d2" path="res://assets/objects/advanced_camera.gd" id="2_26xia"]
-[ext_resource type="PackedScene" uid="uid://bex28ilbukvxj" path="res://assets/mods/disco.tscn" id="2_hcd8q"]
 [ext_resource type="PackedScene" uid="uid://dsa8qmlcm6cfy" path="res://assets/objects/motion_detector.tscn" id="4_78mhe"]
 [ext_resource type="PackedScene" uid="uid://jqhbo8iakpuk" path="res://assets/objects/slam_button.tscn" id="5_7qlp3"]
 [ext_resource type="PackedScene" uid="uid://bh1w36nsqvgsn" path="res://assets/roomGen/roomManager.tscn" id="7_abapv"]
@@ -42,12 +41,6 @@ texture = SubResource("ViewportTexture_fc3n8")
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/CanvasEnemies" unique_id=310096630]
 transparent_bg = true
 size = Vector2i(1152, 648)
-
-[node name="Disco" parent="CanvasLayer/CanvasEnemies/SubViewport" unique_id=744629749 instance=ExtResource("2_hcd8q")]
-position = Vector2(1000, 100)
-fireCount = 100
-fireCooldown = 0.35
-beamNumber = 5
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2053145266]
 position = Vector2(-559, 584)
@@ -89,7 +82,7 @@ trialInterval = 5
 roomNum = 30
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(1472, 121)
+position = Vector2(-446, 1101)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]

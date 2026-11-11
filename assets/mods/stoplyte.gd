@@ -1,12 +1,14 @@
-extends Node2D
+extends ModifierEnemy
 
+@onready var body : Node2D = $"."
 @onready var head : TextureRect = $Head
 @onready var headChain : RigidBody2D = $chain2
 @onready var light : ColorRect = $Head/light
 @onready var anims : AnimationPlayer = $AnimationPlayer
 
-@export var playerReference : Player
+@export var screenOrigin : Vector2 = Vector2(800, -100)
 @export_group("Timers")
+@export var stackMultiplier : float = 1.21
 @export var appearInterval : float = 17.95
 @export var warnDuration : float = 1
 @export var attackLeeway : float = 0.3
@@ -16,18 +18,27 @@ extends Node2D
 @export var phaseWarn : Color
 @export var phaseAttack : Color
 
+var realAppearInterval : float = 17.95
 var targetPos : Vector2 = Vector2.ZERO
 var phaseTimer : float = 0.0
 var lightPhase : int = 0
 
+func _mod_reset() -> void:
+	super()
+	realAppearInterval = appearInterval - (0.0 if curStack < 2 else curStack*stackMultiplier)
+	phaseTimer = realAppearInterval
+	body.position = screenOrigin
+
 func _ready() -> void:
-	phaseTimer = appearInterval
+	_mod_reset()
 	add_commands()
 
 func add_commands() -> void:
 	Console.add_command("set_stoplyte_timer", set_time, ["value"], 1, "Sets current phase timer")
 
 func _process(delta: float) -> void:
+	if paused:
+		return
 	phaseTimer -= delta
 	#$lock.position = lerp($lock.position, targetPos, 0.1)
 	#head.position = headChain.position - Vector2(head.size.x/2, 0)
@@ -58,7 +69,7 @@ func _process(delta: float) -> void:
 				#light.color.v = 0.14486655592918
 				if playerReference.is_moving():
 					print("stoplyte Hit! Hit state: " + str(playerReference.stateMachine.currentState))
-				phaseTimer = appearInterval
+				phaseTimer = realAppearInterval
 				lightPhase = 0
 				anims.play("rise")
 
@@ -68,4 +79,4 @@ func set_color(index : int) -> void:
 
 func set_time(time : String) -> void:
 	phaseTimer = float(time)
-	Console.print_info("Time set to %d/%d" % [float(time), appearInterval])
+	Console.print_info("Time set to %d/%d" % [float(time), realAppearInterval])

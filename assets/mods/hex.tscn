@@ -4,3 +4,7 @@
 
 [node name="Hex" type="Node2D" unique_id=1101390194]
 script = ExtResource("1_y7w4o")
+windowExpireTimer = 1.77
+path = 1
+dataName = "hex"
+maxStack = 2

@@ -33,6 +33,7 @@ func _interacted() -> void:
 			for node in get_tree().current_scene.get_children():
 				if node is RoomManager:
 					node.generate_rooms()
+					GameManager.saferoom_trigger(false)
 					break
 
 func set_door_properties() -> void:

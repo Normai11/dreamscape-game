@@ -1,8 +1,11 @@
-extends Node2D
+extends ModifierEnemy
 
+@onready var body : Node2D = $"."
 @onready var beam : PackedScene = preload("res://assets/objects/disco_beam.tscn")
 
+@export var screenOrigin : Vector2 = Vector2(1000, 100)
 @export var screenRange : Vector2 = Vector2(150, 1000)
+@export var stackMultiplier : float = 1.33
 @export var appearInterval : float = 20.37
 @export var dropDuration : float = 0.667
 @export var fireCount : int = 3
@@ -11,14 +14,20 @@ extends Node2D
 @export var beamLength : float = 2500.0
 @export var shiftDir : int = 1
 
+var realFireCount : int = 3
+var realAppearInterval : float = 20.37
 var curState : int = 0
 var beamsFired : int = 0
 var stateTimer : float = 0.0
 var targetPos : float = 0.0
 
 func _mod_reset() -> void:
-	stateTimer = appearInterval
+	super()
+	body.position = screenOrigin
+	stateTimer = realAppearInterval
 	targetPos = screenRange.y
+	realAppearInterval = appearInterval - (0.0 if curStack < 2 else curStack*stackMultiplier)
+	realFireCount = fireCount + (0 if curStack < 2 else curStack)
 	beamsFired = 0
 	curState = 0
 
@@ -27,28 +36,31 @@ func _ready() -> void:
 	add_commands()
 
 func _process(delta: float) -> void:
+	if paused:
+		return
+	
 	stateTimer -= delta
-	position.x = lerp(position.x, targetPos, 0.05)
+	body.position.x = lerp(body.position.x, targetPos, 0.05)
 	
 	match curState:
 		0:
-			modulate.a = 0.33
+			body.modulate.a = 0.33
 			if stateTimer <= 0:
 				stateTimer = dropDuration
 				curState = 1
 		1:
 			#do dropping sequence or whatever
-			modulate.a = 1
+			body.modulate.a = 1
 			if stateTimer <= 0:
 				curState = 2
 		2: # CHECK state
 			if stateTimer <= 0:
-				if beamsFired < fireCount:
+				if beamsFired < realFireCount:
 					stateTimer = fireCooldown/2
 					shift_position()
 					curState = 3
 				else:
-					stateTimer = appearInterval
+					stateTimer = realAppearInterval
 					beamsFired = 0
 					curState = 0
 		3: # SHIFT state
@@ -74,6 +86,8 @@ func shift_position(customX : float = -1000.0) -> void:
 		shiftDir = (sign(targetPos - randPos) if sign(targetPos - randPos) != 0.0 else 1)
 		targetPos = randPos
 	
+	if $AnimationPlayer.is_playing():
+		$AnimationPlayer.stop()
 	$AnimationPlayer.play("spin")
 	$body.flip_h = (true if shiftDir == -1 else false)
 
@@ -89,7 +103,7 @@ func summon_beam() -> void:
 	get_tree().current_scene.add_child(spawn)
 
 func get_2D_position() -> Vector2:
-	var screenPos: Vector2 = self.get_global_transform_with_canvas().origin
+	var screenPos: Vector2 = body.get_global_transform_with_canvas().origin
 	
 	var worldTransform: Transform2D = get_tree().current_scene.get_viewport().get_canvas_transform().affine_inverse()
 	var worldPos: Vector2 = worldTransform * screenPos# + Vector2(120, 130)

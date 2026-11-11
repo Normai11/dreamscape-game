@@ -7,3 +7,4 @@ func _interacted() -> void:
 		return
 	super()
 	solid.set_deferred("disabled", true)
+	GameManager.saferoom_trigger(true)

@@ -21,6 +21,9 @@ height = 38.0
 radius = 14.0
 height = 76.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc3n8"]
+size = Vector2(62, 88)
+
 [node name="Player" type="CharacterBody2D" unique_id=692287280 node_paths=PackedStringArray("movingStates", "interactionStates")]
 collision_layer = 2
 collision_mask = 9
@@ -104,6 +107,16 @@ collision_mask = 4
 hit_from_inside = true
 collide_with_areas = true
 
+[node name="areaDetect" type="Area2D" parent="." unique_id=1295100896]
+collision_layer = 0
+collision_mask = 1024
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="areaDetect" unique_id=640607524]
+z_index = -3
+shape = SubResource("RectangleShape2D_fc3n8")
+debug_color = Color(0, 0.8515625, 0.711853, 0.41960785)
+
 [node name="StateMachine" type="Node" parent="." unique_id=1424011280 node_paths=PackedStringArray("initialState", "debugLabel")]
 script = ExtResource("2_hvr4l")
 initialState = NodePath("Idle")
@@ -145,3 +158,6 @@ metadata/_custom_type_script = "uid://bpw16dd11n7qd"
 [node name="NOCLIP" type="Node" parent="StateMachine" unique_id=1131978549]
 script = ExtResource("10_imw2v")
 metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[connection signal="area_entered" from="areaDetect" to="." method="_entered_saferoom"]
+[connection signal="area_exited" from="areaDetect" to="." method="_exited_saferoom"]
