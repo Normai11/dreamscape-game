@@ -32,6 +32,7 @@ extends CharacterBody2D
 ## Constant speed when in Dash state.
 @export var dashSpeed : float = 877.0
 @export var dashDuration : float = 0.42
+@export var crouchTrackStartDur : float = 0.85
 
 const breakRayMinReach : float = 64.0
 const interactRayLength : float = 80.0
@@ -66,7 +67,7 @@ func _physics_process(_delta: float) -> void:
 					collider._interacted()
 
 func debug_junk() -> void:
-	$debugSpeed.text = str(velocity)
+	$debugSpeed.text = str(velocity) + "\ntrackstart : " + str($StateMachine/Crouch.trackStartTime > crouchTrackStartDur)
 	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakRay.enabled, get_can_interact() && interactRay.is_colliding()]
 	$TextureRect.flip_h = (true if direction == -1 else false)
 
@@ -129,7 +130,6 @@ func set_debugTexture_visible(on : String) -> void:
 		$TextureRect.visible = true
 	else:
 		$TextureRect.visible = false
-
 
 func _entered_saferoom(area: Area2D) -> void:
 	GameManager.saferoom_trigger(true)

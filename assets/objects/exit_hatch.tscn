@@ -30,3 +30,5 @@ requiredStateName = "slam"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="solid" unique_id=1810835621]
 position = Vector2(0, 34.5)
 shape = SubResource("RectangleShape2D_b3y26")
+
+[connection signal="_destroyed" from="solid" to="." method="_hatch_destroy"]

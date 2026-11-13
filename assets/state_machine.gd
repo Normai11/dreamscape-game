@@ -9,6 +9,7 @@ signal changeError(output)
 var states : Dictionary = {}
 var currentState : State
 var previousState : State
+var specialStateData = []
 
 func _ready() -> void:
 	for child in get_children():
@@ -27,7 +28,7 @@ func _physics_process(delta: float) -> void:
 	if currentState:
 		currentState.physics_update(delta)
 
-func change_state(state, newStateNode) -> void:
+func change_state(state, newStateNode, specialData = []) -> void:
 	if state != currentState:
 		return
 	
@@ -37,12 +38,20 @@ func change_state(state, newStateNode) -> void:
 	
 	if currentState:
 		currentState.exit()
-	newState.enter()
 	
 	previousState = currentState
 	currentState = newState
+	specialStateData = specialData
+	
+	newState.enter()
 
 func body_active() -> void:
 	if initialState:
 		initialState.enter()
 		currentState = initialState
+
+func get_special_data() -> Array:
+	if specialStateData:
+		return specialStateData
+	else:
+		return []

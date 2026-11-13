@@ -10,9 +10,11 @@ func enter() -> void:
 	player.breakRay.enabled = true
 	player.set_collision_mask_value(4, false)
 	if abs(player.velocity.x) <= player.slideStartMin:
-		curSpeed = player.slideStartMin * player.direction
+		curSpeed = player.slideStartMin
 	else:
-		player.velocity.x = abs(player.velocity.x) * player.direction
+		curSpeed = abs(player.velocity.x)
+	player.velocity.x = curSpeed * player.direction
+	#print(str(curSpeed) + str(player.velocity.x))
 	player.abilityUsed = false
 
 func physics_update(delta) -> void:
@@ -28,10 +30,10 @@ func physics_update(delta) -> void:
 	
 	if player.is_on_wall():
 		if player.doBonkPenalty:
-			curSpeed = (abs(curSpeed) - player.bonkPenaltyAmt) * player.direction
+			curSpeed = (abs(curSpeed) - player.bonkPenaltyAmt)
 		player.direction = -player.direction
-		curSpeed = -curSpeed
-	player.velocity.x = curSpeed
+		#curSpeed = -curSpeed
+	player.velocity.x = curSpeed * player.direction
 	player.velocity.y += player.gravity * delta
 	if !Input.is_action_pressed("jump") && !player.is_on_floor():
 		player.velocity.y = lerp(player.velocity.y, player.gravity, 0.02)
@@ -44,7 +46,7 @@ func physics_update(delta) -> void:
 		var slopeAngle = roundi(rad_to_deg(player.get_floor_angle()))
 		if slopeAngle >= 20:
 			var climbing : int = (1 if player.get_real_velocity().y < 0 else -1)
-			curSpeed += ((slopeAngle * 0.37) * climbing) * -player.direction
+			curSpeed -= ((slopeAngle * 0.37) * climbing)# * -player.direction
 			if abs(player.velocity.x) <= player.crouchSpeed:
 				transitioned.emit(self, "crouch")
 	

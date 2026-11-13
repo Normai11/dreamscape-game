@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://bm4e85tat2st0" path="res://assets/Player/stateDashJump.gd" id="6_6gjsn"]
 [ext_resource type="Script" uid="uid://w3xa34g1xmsn" path="res://assets/Player/stateSlide.gd" id="6_nh4ep"]
 [ext_resource type="Script" uid="uid://cvklsaiajxqng" path="res://assets/Player/stateSlam.gd" id="7_6gjsn"]
+[ext_resource type="Script" uid="uid://dr4bpxja4r35k" path="res://assets/Player/stateTrackStart.gd" id="7_okbsk"]
 [ext_resource type="Script" uid="uid://b1bjsds4taxrm" path="res://assets/Player/stateBonk.gd" id="10_7a8rx"]
 [ext_resource type="Script" uid="uid://celpqp34w3ang" path="res://assets/Player/stateNoclip.gd" id="10_imw2v"]
 [ext_resource type="Texture2D" uid="uid://dfredcsrpo4jo" path="res://placeholders/player_texturesRenderTest.png" id="12_ty0rd"]
@@ -49,9 +50,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -93.0
+offset_top = -123.0
 offset_right = 324.0
-offset_bottom = -70.0
+offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical_alignment = 1
@@ -62,9 +63,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -62.0
+offset_top = -92.0
 offset_right = 324.0
-offset_bottom = -39.0
+offset_bottom = -69.0
 grow_horizontal = 2
 grow_vertical = 2
 vertical_alignment = 1
@@ -75,9 +76,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -144.0
+offset_top = -175.0
 offset_right = 324.0
-offset_bottom = -90.0
+offset_bottom = -121.0
 grow_horizontal = 2
 grow_vertical = 2
 bbcode_enabled = true
@@ -134,6 +135,9 @@ metadata/_custom_type_script = "uid://bpw16dd11n7qd"
 [node name="Crouch" type="Node" parent="StateMachine" unique_id=1674037296]
 script = ExtResource("5_vfaks")
 metadata/_custom_type_script = "uid://bpw16dd11n7qd"
+
+[node name="trackStart" type="Node" parent="StateMachine" unique_id=1236049174]
+script = ExtResource("7_okbsk")
 
 [node name="Slide" type="Node" parent="StateMachine" unique_id=1536009513]
 script = ExtResource("6_nh4ep")

@@ -8,3 +8,6 @@ func _interacted() -> void:
 	super()
 	solid.set_deferred("disabled", true)
 	GameManager.saferoom_trigger(true)
+
+func _hatch_destroy() -> void:
+	GameManager.saferoom_trigger(true)

@@ -1,6 +1,6 @@
 extends Node
 class_name State
-signal transitioned(current, target)
+signal transitioned(current, target, special)
 
 var machine : StateMachine
 
