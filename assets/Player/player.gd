@@ -4,7 +4,7 @@ extends CharacterBody2D
 @onready var stateMachine : StateMachine = $StateMachine
 @onready var collisionStand : CollisionShape2D = $Stand
 @onready var collisionCrouch : CollisionShape2D = $Crouch
-@onready var breakRay : RayCast2D = $breakRay
+@onready var breakDetect : Area2D = $breakDetect
 @onready var interactRay : RayCast2D = $interactRay
 
 @export var gravity : float = 1785.0
@@ -34,7 +34,7 @@ extends CharacterBody2D
 @export var dashDuration : float = 0.42
 @export var crouchTrackStartDur : float = 0.85
 
-const breakRayMinReach : float = 64.0
+const minBreakSize : Vector2 = Vector2(75, 64)
 const interactRayLength : float = 80.0
 
 var direction : int = 1
@@ -47,7 +47,7 @@ func _ready() -> void:
 	add_commands()
 
 func add_commands() -> void:
-	Console.pause_enabled = true
+	#Console.pause_enabled = true
 	Console.add_command("set_state", change_state, ["stateName"], 1, "Set player state")
 	Console.add_command_autocomplete_list("set_state", stateMachine.states.keys())
 	Console.add_command("set_stat", set_attribute, ["statName", "value", "type"], 3, "Set specific player attribute value")
@@ -68,7 +68,7 @@ func _physics_process(_delta: float) -> void:
 
 func debug_junk() -> void:
 	$debugSpeed.text = str(velocity) + "\ntrackstart : " + str($StateMachine/Crouch.trackStartTime > crouchTrackStartDur)
-	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakRay.enabled, get_can_interact() && interactRay.is_colliding()]
+	$debugRays.text = "[color=blue]breakRay : %s\n[color=cyan]interactRay : %s" % [breakDetect.monitoring, get_can_interact() && interactRay.is_colliding()]
 	$TextureRect.flip_h = (true if direction == -1 else false)
 
 func is_moving() -> bool:
@@ -131,8 +131,8 @@ func set_debugTexture_visible(on : String) -> void:
 	else:
 		$TextureRect.visible = false
 
-func _entered_saferoom(area: Area2D) -> void:
-	GameManager.saferoom_trigger(true)
-
-func _exited_saferoom(area: Area2D) -> void:
-	GameManager.saferoom_trigger(false)
+#func _entered_saferoom(area: Area2D) -> void:
+	#GameManager.saferoom_trigger(true)
+#
+#func _exited_saferoom(area: Area2D) -> void:
+	#GameManager.saferoom_trigger(false)

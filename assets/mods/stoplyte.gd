@@ -27,10 +27,11 @@ func _mod_reset() -> void:
 	super()
 	realAppearInterval = appearInterval - (0.0 if curStack < 2 else curStack*stackMultiplier)
 	phaseTimer = realAppearInterval
+	lightPhase = 0
+	anims.play("RESET")
 	body.position = screenOrigin
 
 func _ready() -> void:
-	_mod_reset()
 	add_commands()
 
 func add_commands() -> void:

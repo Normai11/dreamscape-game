@@ -7,14 +7,13 @@ var realSpeed : float = 800.0
 func enter() -> void:
 	player = machine.get_parent()
 	player.velocity.x = enterSpeed * player.direction
-	player.breakRay.enabled = true
+	player.breakDetect.monitoring = true
 	player.set_collision_mask_value(4, false)
-	player.breakRay.target_position = Vector2(player.breakRayMinReach * player.direction, 0.0)
 
 func physics_update(delta) -> void:
-	player.breakRay.target_position = Vector2(clampf(abs((player.velocity.x/4)) - 100, player.breakRayMinReach, INF) * player.direction, 0)
-	if player.breakRay.is_colliding():
-		var collider = player.breakRay.get_collider()
+	player.breakDetect.get_child(0).shape.size = Vector2(clampf(abs(player.velocity.x/6.5) - 100, player.minBreakSize.x, INF), player.minBreakSize.y)
+	if player.breakDetect.has_overlapping_bodies():
+		var collider = player.breakDetect.get_overlapping_bodies()[0]
 		if collider is Destroyable:
 			if collider.requiredStateName.to_lower() == "dash":
 				collider.destroy()
@@ -38,5 +37,5 @@ func check_transition() -> void:
 		transitioned.emit(self, "dash")
 
 func exit() -> void:
-	player.breakRay.enabled = false
+	player.breakDetect.monitoring = false
 	player.set_collision_mask_value(4, true)

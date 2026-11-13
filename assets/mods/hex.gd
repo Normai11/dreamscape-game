@@ -34,7 +34,6 @@ func _saferoom(entered : bool) -> void:
 		windowChildren.clear()
 
 func _ready() -> void:
-	_mod_reset()
 	add_commands()
 
 func add_commands() -> void:

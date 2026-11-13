@@ -8,14 +8,13 @@ func enter() -> void:
 	exitSpeed = abs(player.velocity.x)
 	player.velocity.y = player.gravity
 	player.velocity.x = 275.0 * player.direction
-	player.breakRay.enabled = true
+	player.breakDetect.monitoring = true
 	player.set_collision_mask_value(4, false)
-	player.breakRay.target_position = Vector2(0.0, player.breakRayMinReach)
 
 func physics_update(delta) -> void:
-	player.breakRay.target_position = Vector2(0, clampf(abs((player.velocity.y/6.5)) - 100, player.breakRayMinReach, INF))
-	if player.breakRay.is_colliding():
-		var collider = player.breakRay.get_collider()
+	player.breakDetect.get_child(0).shape.size = Vector2(player.minBreakSize.x, clampf(abs(player.velocity.y/6.5) - 100, player.minBreakSize.y, INF))
+	if player.breakDetect.has_overlapping_bodies():
+		var collider = player.breakDetect.get_overlapping_bodies()[0]
 		if collider is Destroyable:
 			if collider.requiredStateName.to_lower() == self.name.to_lower():
 				collider.destroy()
@@ -40,5 +39,5 @@ func check_transitions() -> void:
 func exit() -> void:
 	#player.velocity.y = -player.jumpHeight/1.5
 	player.velocity.x = exitSpeed * player.direction
-	player.breakRay.enabled = false
+	player.breakDetect.monitoring = true
 	player.set_collision_mask_value(4, true)

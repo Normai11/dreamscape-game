@@ -82,7 +82,7 @@ trialInterval = 5
 roomNum = 30
 
 [node name="Player" parent="." unique_id=692287280 instance=ExtResource("1_i4mmp")]
-position = Vector2(-446, 1101)
+position = Vector2(-471, 1097)
 doBonkPenalty = true
 
 [node name="advCamera" type="Camera2D" parent="." unique_id=1112012548 node_paths=PackedStringArray("cameraTarget")]

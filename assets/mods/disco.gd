@@ -32,7 +32,6 @@ func _mod_reset() -> void:
 	curState = 0
 
 func _ready() -> void:
-	_mod_reset()
 	add_commands()
 
 func _process(delta: float) -> void:

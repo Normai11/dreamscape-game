@@ -10,6 +10,7 @@ var instantiatedModScenes : Dictionary[String, Array]
 var scenePlayer : Player
 var sceneCanvas : CanvasLayer
 var sceneScreenies : SubViewport
+var isSaferoom : bool = false
 
 func update_sceneVitals() -> void:
 	for node in get_tree().current_scene.get_children():
@@ -27,9 +28,10 @@ func _ready() -> void:
 
 func add_commands() -> void:
 	Console.add_command("set_fps", set_fps, ["int"], 1)
-	Console.add_command("add_mod", add_mod, ["String"], 1)
+	Console.add_command("add_mod", add_mod_console, ["String", "int"], 2)
 
 func saferoom_trigger(enter : bool) -> void:
+	isSaferoom = enter
 	for enemy in instantiatedModScenes:
 		var scene = instantiatedModScenes[enemy][0]
 		if scene is ModifierEnemy:
@@ -39,8 +41,17 @@ func set_fps(cap : String) -> void:
 	Engine.max_fps = int(cap)
 	Console.print_info("Framerate limit set to %s" % [cap])
 
-func add_all_mods() -> void:
-	pass #will be used in a for loop when modifier resource files are added
+func add_mod_console(mod : String, amt : String = "1") -> void:
+	if !amt.is_valid_int():
+		Console.print_error("Stack parameter is not an integer!")
+	
+	for i in int(amt):
+		add_mod(mod)
+		await get_tree().process_frame
+	if !isSaferoom:
+		for enemy in instantiatedModScenes:
+			var data : Array = instantiatedModScenes[enemy]
+			data[0]._mod_reset()
 
 func add_mod(modName : String) -> void:
 	update_sceneVitals()
@@ -57,7 +68,6 @@ func add_mod(modName : String) -> void:
 				else:
 					data[1] += 1
 					data[0].curStack = data[1]
-					data[0]._mod_reset()
 		"disco":
 			if !instantiatedModScenes.has("disco"):
 				add_to_scene(modFiles[2])
@@ -68,7 +78,6 @@ func add_mod(modName : String) -> void:
 				else:
 					data[1] += 1
 					data[0].curStack = data[1]
-					data[0]._mod_reset()
 		"hex":
 			if !instantiatedModScenes.has("hex"):
 				add_to_scene(modFiles[1])
@@ -79,7 +88,6 @@ func add_mod(modName : String) -> void:
 				else:
 					data[1] += 1
 					data[0].curStack = data[1]
-					data[0]._mod_reset()
 
 func add_to_scene(instance : PackedScene) -> void:
 			var scene : ModifierEnemy = instance.instantiate()
